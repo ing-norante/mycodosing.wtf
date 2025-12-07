@@ -7,6 +7,29 @@
     <title>MycoMetric — Psilocybin Dosage Calculator</title>
     <meta name="description" content="Research-informed psychedelic dosage calculator for psilocybin mushrooms, sclerotia, and synthetic tryptamines." />
 
+    <!-- Inline script to prevent FOUC (Flash of Unstyled Content) -->
+    <script>
+      (function() {
+        // Get stored preferences or defaults
+        var colorTheme = localStorage.getItem('mycometric-color-theme') || 'teal';
+        var mode = localStorage.getItem('mycometric-mode') || 'system';
+
+        // Set color theme
+        document.documentElement.setAttribute('data-color-theme', colorTheme);
+
+        // Resolve mode (check system preference if mode is 'system')
+        var resolvedMode = mode;
+        if (mode === 'system') {
+          resolvedMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+
+        // Apply dark mode class
+        if (resolvedMode === 'dark') {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

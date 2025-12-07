@@ -3,7 +3,11 @@
 
 @custom-variant dark (&:is(.dark *));
 
-:root {
+/* ============================================
+   TEAL THEME (default)
+   ============================================ */
+:root,
+[data-color-theme="teal"] {
   --background: oklch(95.08% 0.0481 184.07);
   --secondary-background: oklch(100% 0 0);
   --foreground: oklch(0% 0 0);
@@ -21,7 +25,9 @@
   --chart-active-dot: #000;
 }
 
-.dark {
+.dark[data-color-theme="teal"],
+[data-color-theme="teal"] .dark,
+.dark:not([data-color-theme]) {
   --background: oklch(22.65% 0.0236 198.49);
   --secondary-background: oklch(23.93% 0 0);
   --foreground: oklch(92.49% 0 0);
@@ -38,6 +44,126 @@
   --chart-active-dot: #fff;
 }
 
+/* ============================================
+   PURPLE THEME
+   ============================================ */
+[data-color-theme="purple"] {
+  --background: oklch(94.11% 0.036556 308.0303);
+  --secondary-background: oklch(100% 0 0);
+  --foreground: oklch(0% 0 0);
+  --main-foreground: oklch(0% 0 0);
+  --main: oklch(71.9% 0.198 310.03);
+  --border: oklch(0% 0 0);
+  --ring: oklch(0% 0 0);
+  --overlay: oklch(0% 0 0 / 0.8);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --chart-1: #ca7aff;
+  --chart-2: #facc00;
+  --chart-3: #00d696;
+  --chart-4: #ff7a05;
+  --chart-5: #0099ff;
+  --chart-active-dot: #000;
+}
+
+.dark[data-color-theme="purple"],
+[data-color-theme="purple"] .dark {
+  --background: oklch(29.68% 0.0791 315.62);
+  --secondary-background: oklch(23.93% 0 0);
+  --foreground: oklch(92.49% 0 0);
+  --main-foreground: oklch(0% 0 0);
+  --main: oklch(67.34% 0.2314 309.13);
+  --border: oklch(0% 0 0);
+  --ring: oklch(100% 0 0);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --chart-1: #d494ff;
+  --chart-2: #e0b700;
+  --chart-3: #00bd84;
+  --chart-4: #eb6d00;
+  --chart-5: #008ae5;
+  --chart-active-dot: #fff;
+}
+
+/* ============================================
+   YELLOW THEME
+   ============================================ */
+[data-color-theme="yellow"] {
+  --background: oklch(96.79% 0.0654 102.26);
+  --secondary-background: oklch(100% 0 0);
+  --foreground: oklch(0% 0 0);
+  --main-foreground: oklch(0% 0 0);
+  --main: oklch(86.03% 0.176 92.36);
+  --border: oklch(0% 0 0);
+  --ring: oklch(0% 0 0);
+  --overlay: oklch(0% 0 0 / 0.8);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --chart-1: #facc00;
+  --chart-2: #7a83ff;
+  --chart-3: #ff4d50;
+  --chart-4: #00d696;
+  --chart-5: #0099ff;
+  --chart-active-dot: #000;
+}
+
+.dark[data-color-theme="yellow"],
+[data-color-theme="yellow"] .dark {
+  --background: oklch(29.28% 0.0373 94.38);
+  --secondary-background: oklch(23.93% 0 0);
+  --foreground: oklch(92.49% 0 0);
+  --main-foreground: oklch(0% 0 0);
+  --main: oklch(79.36% 0.1624 92.49);
+  --border: oklch(0% 0 0);
+  --ring: oklch(100% 0 0);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --chart-1: #e0b700;
+  --chart-2: #7a83ff;
+  --chart-3: #ff6669;
+  --chart-4: #00bd84;
+  --chart-5: #008ae5;
+  --chart-active-dot: #fff;
+}
+
+/* ============================================
+   LIME THEME
+   ============================================ */
+[data-color-theme="lime"] {
+  --background: oklch(95.37% 0.0549 125.19);
+  --secondary-background: oklch(100% 0 0);
+  --foreground: oklch(0% 0 0);
+  --main-foreground: oklch(0% 0 0);
+  --main: oklch(83.29% 0.2331 132.51);
+  --border: oklch(0% 0 0);
+  --ring: oklch(0% 0 0);
+  --overlay: oklch(0% 0 0 / 0.8);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --chart-1: #8ae500;
+  --chart-2: #0099ff;
+  --chart-3: #ff4d50;
+  --chart-4: #facc00;
+  --chart-5: #7a83ff;
+  --chart-active-dot: #000;
+}
+
+.dark[data-color-theme="lime"],
+[data-color-theme="lime"] .dark {
+  --background: oklch(23.1% 0.0346 126.75);
+  --secondary-background: oklch(23.93% 0 0);
+  --foreground: oklch(92.49% 0 0);
+  --main-foreground: oklch(0% 0 0);
+  --main: oklch(76.26% 0.21309 132.4002);
+  --border: oklch(0% 0 0);
+  --ring: oklch(100% 0 0);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --chart-1: #7acc00;
+  --chart-2: #008ae5;
+  --chart-3: #ff6669;
+  --chart-4: #e0b700;
+  --chart-5: #7a83ff;
+  --chart-active-dot: #fff;
+}
+
+/* ============================================
+   THEME INLINE VARIABLES
+   ============================================ */
 @theme inline {
   --color-main: var(--main);
   --color-background: var(--background);
