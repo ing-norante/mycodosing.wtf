@@ -29,38 +29,76 @@ const KEY_CITATIONS = [
   },
 ];
 
-export function ScientificFoundation() {
+interface CitationWithLink {
+  authors: string;
+  year: number;
+  title: string;
+  link?: string;
+  relevance?: string;
+}
+
+interface CitationsListProps {
+  citations: CitationWithLink[];
+  title?: string;
+  className?: string;
+}
+
+export function CitationsList({
+  citations,
+  title = "References",
+  className = "w-full max-w-xl",
+}: CitationsListProps) {
+  if (citations.length === 0) return null;
+
   return (
-    <Accordion type="single" collapsible className="w-full max-w-xl">
+    <Accordion type="single" collapsible className={className}>
       <div className="text-foreground mb-2 flex items-center justify-between text-xs tracking-widest uppercase">
         <span className="text-foreground mb-2 text-xs tracking-widest uppercase">
-          Scientific foundations
+          {title}
         </span>
         <span className="text-foreground mb-2 text-right text-xs tracking-widest uppercase">
-          {`(${KEY_CITATIONS.length})`}
+          {`(${citations.length})`}
         </span>
       </div>
 
-      {KEY_CITATIONS.map((citation) => (
-        <AccordionItem key={citation.title} value={citation.title}>
+      {citations.map((citation, index) => (
+        <AccordionItem
+          key={`${citation.title}-${index}`}
+          value={citation.title}
+        >
           <AccordionTrigger>
             {citation.authors} ({citation.year})
           </AccordionTrigger>
           <AccordionContent>
-            <div className="flex items-center justify-between">
-              <p className="text-foreground text-sm">{citation.title}</p>
-              <a
-                href={citation.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-foreground text-xs"
-              >
-                <ExternalLink className="h-4 w-4" />
-              </a>
+            <div className="space-y-2">
+              <div className="flex items-center justify-between">
+                <p className="text-foreground text-sm">{citation.title}</p>
+                {citation.link && (
+                  <a
+                    href={citation.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-foreground text-xs"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                )}
+              </div>
+              {citation.relevance && (
+                <p className="border-border mt-1 border-l-2 pl-4 text-xs">
+                  Relevance: {citation.relevance}
+                </p>
+              )}
             </div>
           </AccordionContent>
         </AccordionItem>
       ))}
     </Accordion>
+  );
+}
+
+export function ScientificFoundation() {
+  return (
+    <CitationsList citations={KEY_CITATIONS} title="Scientific foundations" />
   );
 }

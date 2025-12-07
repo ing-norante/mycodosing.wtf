@@ -90,7 +90,7 @@ export function InputPanel({ onResult }: InputPanelProps) {
         <div className="space-y-8">
           {/* Substance Selection */}
           <section>
-            <h3 className="text-muted-foreground mb-4 text-xs tracking-widest uppercase">
+            <h3 className="mb-4 text-xs tracking-widest uppercase">
               1. Select Substance
             </h3>
             <SubstanceSelector value={substance} onChange={setSubstance} />
@@ -98,7 +98,7 @@ export function InputPanel({ onResult }: InputPanelProps) {
 
           {/* Intensity Selection */}
           <section>
-            <h3 className="text-muted-foreground mb-4 text-xs tracking-widest uppercase">
+            <h3 className="mb-4 text-xs tracking-widest uppercase">
               2. Choose Intensity
             </h3>
             <IntensitySelector value={intensity} onChange={setIntensity} />
