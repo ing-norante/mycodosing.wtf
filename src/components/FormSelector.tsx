@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import type { MaterialForm } from "@/lib/calculator";
+import { cn } from "@/lib/utils";
 
 interface FormSelectorProps {
   value: MaterialForm;
@@ -11,15 +12,19 @@ export function FormSelector({ value, onChange }: FormSelectorProps) {
     <div className="flex gap-2">
       <Button
         onClick={() => onChange("dried")}
-        className="flex-1 font-semibold transition-colors"
-        variant={value === "dried" ? "default" : "neutral"}
+        className={cn(
+          "flex-1 font-semibold transition-colors",
+          value !== "dried" && "bg-transparent",
+        )}
       >
         DRIED
       </Button>
       <Button
         onClick={() => onChange("fresh")}
-        className="flex-1 font-semibold transition-colors"
-        variant={value === "fresh" ? "default" : "neutral"}
+        className={cn(
+          "flex-1 font-semibold transition-colors",
+          value !== "fresh" && "bg-transparent",
+        )}
       >
         FRESH
       </Button>

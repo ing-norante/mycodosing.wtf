@@ -8,6 +8,7 @@ import { getSpeciesList, getSyntheticList } from "@/lib/calculator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SpeciesAndFormSelector } from "./SpeciesAndFormSelector";
 import { SyntheticCompoundSelector } from "./SyntheticCompoundSelector";
+import { cn } from "@/lib/utils";
 
 const SUBSTANCE_TYPES: {
   id: SubstanceCategory;
@@ -71,12 +72,17 @@ export function SubstanceSelector({ value, onChange }: SubstanceSelectorProps) {
 
   return (
     <Tabs value={currentType} onValueChange={handleTypeChange}>
-      <TabsList className="bg-background size-auto w-full items-center justify-between">
+      <TabsList className="bg-background size-auto w-full items-center justify-between border-none">
         {SUBSTANCE_TYPES.map((type) => (
           <TabsTrigger
             key={type.id}
             value={type.id}
-            className="bg-background size-20 w-full lg:size-40"
+            className={cn(
+              "bg-background size-20 w-full lg:size-40 shadow-shadow",
+              type.id === currentType
+                ? "border-border"
+                : "border-border bg-secondary-background/20",
+            )}
           >
             <div className="flex flex-col items-center justify-center gap-1">
               <span className="text-sm font-bold uppercase lg:text-lg">

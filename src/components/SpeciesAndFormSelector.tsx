@@ -48,7 +48,7 @@ export function SpeciesAndFormSelector({
             onSpeciesChange(value as Species | SclerotiaSpecies)
           }
         >
-          <SelectTrigger>
+          <SelectTrigger className="shadow-shadow p-1">
             <SelectValue
               placeholder={
                 <>

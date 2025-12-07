@@ -33,7 +33,10 @@ export function SyntheticCompoundSelector({
           <Button
             key={synth.id}
             onClick={() => onCompoundChange(synth.id as SyntheticCompound)}
-            variant={selectedCompound === synth.id ? "default" : "neutral"}
+            className={cn(
+              "flex-1 font-semibold transition-colors",
+              selectedCompound !== synth.id && "bg-transparent",
+            )}
           >
             <div className="flex flex-col items-center justify-center">
               <span className="block font-bold">

@@ -44,42 +44,40 @@ export function AdvancedSettings({
   onStorageDegradationChange,
 }: AdvancedSettingsProps) {
   return (
-    <div className="brutalist-card">
-      <Accordion type="single" collapsible className="w-full max-w-xl">
-        <AccordionItem value="item-1">
-          <AccordionTrigger>Advanced Factors</AccordionTrigger>
-          <AccordionContent>
-            <div className="mt-6 space-y-6">
-              <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-                <BodyPharmacologySection
-                  bodyWeightKg={bodyWeightKg}
-                  useWeightAdjustment={useWeightAdjustment}
-                  onMAOI={onMAOI}
-                  onBodyWeightChange={onBodyWeightChange}
-                  onUseWeightAdjustmentChange={onUseWeightAdjustmentChange}
-                  onMAOIChange={onMAOIChange}
-                />
+    <Accordion type="single" collapsible className="w-full">
+      <AccordionItem value="item-1">
+        <AccordionTrigger className="bg-background">Advanced Factors</AccordionTrigger>
+        <AccordionContent className="bg-background">
+          <div className="mt-6 space-y-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+              <BodyPharmacologySection
+                bodyWeightKg={bodyWeightKg}
+                useWeightAdjustment={useWeightAdjustment}
+                onMAOI={onMAOI}
+                onBodyWeightChange={onBodyWeightChange}
+                onUseWeightAdjustmentChange={onUseWeightAdjustmentChange}
+                onMAOIChange={onMAOIChange}
+              />
 
-                <ToleranceSection
-                  lastDosePsilocybinMg={lastDosePsilocybinMg}
-                  daysSinceLastDose={daysSinceLastDose}
-                  onLastDoseChange={onLastDoseChange}
-                  onDaysSinceChange={onDaysSinceChange}
-                />
+              <ToleranceSection
+                lastDosePsilocybinMg={lastDosePsilocybinMg}
+                daysSinceLastDose={daysSinceLastDose}
+                onLastDoseChange={onLastDoseChange}
+                onDaysSinceChange={onDaysSinceChange}
+              />
 
-                {showMaterialQuality && (
-                  <MaterialQualitySection
-                    dryingQuality={dryingQuality}
-                    storageDegradation={storageDegradation}
-                    onDryingQualityChange={onDryingQualityChange}
-                    onStorageDegradationChange={onStorageDegradationChange}
-                  />
-                )}
-              </div>
+              {showMaterialQuality && (
+                <MaterialQualitySection
+                  dryingQuality={dryingQuality}
+                  storageDegradation={storageDegradation}
+                  onDryingQualityChange={onDryingQualityChange}
+                  onStorageDegradationChange={onStorageDegradationChange}
+                />
+              )}
             </div>
-          </AccordionContent>
-        </AccordionItem>
-      </Accordion>
-    </div>
+          </div>
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
   );
 }

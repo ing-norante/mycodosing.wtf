@@ -13,7 +13,7 @@ function DoseSummary({ result }: { result: DosageResult }) {
   const { amount, unit, psilocybinEquivalentMg } = result;
 
   return (
-    <div className="brutalist-card">
+    <Card className="p-4">
       <h3 className="mb-4 text-xs tracking-widest uppercase">
         Recommended Dose
       </h3>
@@ -58,7 +58,7 @@ function DoseSummary({ result }: { result: DosageResult }) {
           <span className="text-xs">mg</span>
         </div>
       </div>
-    </div>
+    </Card>
   );
 }
 
@@ -105,29 +105,29 @@ function BreakdownTable({ result }: { result: DosageResult }) {
   const confidenceStyle = CONFIDENCE_STYLES[confidence];
 
   return (
-    <Card className="p-2">
+    <Card className="p-4">
       <h3 className="text-xs tracking-widest uppercase">Model Insight</h3>
 
       <Table className="w-full text-sm">
         <TableBody className="divide-border divide-y">
-          <TableRow>
+          <TableRow className="bg-transparent">
             <TableCell className="py-2">Base target</TableCell>
             <TableCell className="py-2 text-right font-mono font-bold">
               {baseTargetMg} mg
             </TableCell>
           </TableRow>
-          <TableRow>
+          <TableRow className="bg-transparent">
             <TableCell className="py-2">After weight adjust</TableCell>
             <TableCell className="py-2 text-right font-mono">
               {afterWeightAdjustment} mg
             </TableCell>
           </TableRow>
-          <TableRow>
+          <TableRow className="bg-transparent">
             <TableCell className="py-2">
               After tolerance{" "}
               {toleranceMultiplier > 1 && (
-                <span className="text-background">
-                  (<X className="text-background inline-block size-3" />
+                <span className="text-main">
+                  (<X className="text-main inline-block size-3" />
                   {toleranceMultiplier.toFixed(2)})
                 </span>
               )}
@@ -136,13 +136,13 @@ function BreakdownTable({ result }: { result: DosageResult }) {
               {afterTolerance} mg
             </TableCell>
           </TableRow>
-          <TableRow>
+          <TableRow className="bg-transparent">
             <TableCell className="py-2">After MAOI</TableCell>
             <TableCell className="text-main py-2 text-right font-mono font-bold">
               {afterMAOI} mg
             </TableCell>
           </TableRow>
-          <TableRow>
+          <TableRow className="bg-transparent">
             <TableCell className="py-2">Effective potency</TableCell>
             <TableCell className="py-2 text-right font-mono text-xs">
               {potencyMgPerG.min}-{potencyMgPerG.max} mg/g
@@ -203,7 +203,7 @@ function WarningsList({ result }: { result: DosageResult }) {
   if (warnings.length === 0 && notes.length === 0) return null;
 
   return (
-    <Card className="p-2">
+    <Card className="p-4">
       <h3 className="mb-4 text-xs tracking-widest uppercase">
         Warnings & Notes
       </h3>

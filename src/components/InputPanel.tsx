@@ -8,6 +8,7 @@ import type {
   IntensityLevel,
 } from "@/lib/calculator";
 import { calculateDosage } from "@/lib/calculator";
+import { Card } from "@/components/ui/card";
 
 interface InputPanelProps {
   onResult: (result: DosageResult | null) => void;
@@ -82,7 +83,7 @@ export function InputPanel({ onResult }: InputPanelProps) {
   return (
     <div className="space-y-6">
       {/* Session Setup Card */}
-      <div className="brutalist-card">
+      <Card className="p-2 lg:p-4">
         <h2 className="border-foreground mb-6 border-b-3 pb-3 text-xl font-black tracking-wider uppercase">
           Session Setup
         </h2>
@@ -104,7 +105,7 @@ export function InputPanel({ onResult }: InputPanelProps) {
             <IntensitySelector value={intensity} onChange={setIntensity} />
           </section>
         </div>
-      </div>
+      </Card>
 
       {/* Advanced Settings */}
       <AdvancedSettings

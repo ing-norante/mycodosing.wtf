@@ -33,7 +33,7 @@ export function IntensitySelector({ value, onChange }: IntensitySelectorProps) {
       </Label>
 
       {/* Current Level Display */}
-      <div className="flex items-baseline justify-between gap-3">
+      <div className="flex flex-col items-baseline justify-between gap-3 lg:flex-row">
         <span className="text-main text-3xl font-black sm:text-4xl">
           {levels[currentIndex]?.label.toUpperCase()}
         </span>
