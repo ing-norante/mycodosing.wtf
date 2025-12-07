@@ -25,21 +25,21 @@ function DoseSummary({ result }: { result: DosageResult }) {
       <div className="mb-6 grid grid-cols-3 gap-4">
         <div className="text-center">
           <div className="mb-1 text-xs uppercase">Min</div>
-          <div className="font-mono text-3xl font-black sm:text-4xl">
+          <div className="font-mono text-2xl font-black sm:text-4xl">
             {amount.min}
           </div>
           <div className="font-mono text-sm">{unit}</div>
         </div>
         <div className="border-main border-x-3 text-center">
           <div className="text-main mb-1 text-xs uppercase">Median</div>
-          <div className="text-main font-mono text-4xl font-black sm:text-5xl">
+          <div className="text-main font-mono text-3xl font-black sm:text-5xl">
             {amount.median}
           </div>
           <div className="text-main font-mono text-sm">{unit}</div>
         </div>
         <div className="text-center">
           <div className="mb-1 text-xs uppercase">Max</div>
-          <div className="font-mono text-3xl font-black sm:text-4xl">
+          <div className="font-mono text-2xl font-black sm:text-4xl">
             {amount.max}
           </div>
           <div className="font-mono text-sm">{unit}</div>

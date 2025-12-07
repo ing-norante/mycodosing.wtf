@@ -69,7 +69,7 @@ export function CitationsList({
           <AccordionTrigger>
             {citation.authors} ({citation.year})
           </AccordionTrigger>
-          <AccordionContent>
+          <AccordionContent className="bg-background">
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <p className="text-foreground text-sm">{citation.title}</p>
