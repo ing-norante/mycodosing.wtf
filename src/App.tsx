@@ -10,11 +10,10 @@ function App() {
   const [result, setResult] = useState<DosageResult | null>(null);
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div className="bg-background prose-h4:xl:text-2xl prose-h4:lg:text-xl prose-h4:text-lg min-h-dvh bg-[linear-gradient(to_right,#80808033_1px,transparent_1px),linear-gradient(to_bottom,#80808033_1px,transparent_1px)] bg-size-[70px_70px] px-5 pt-[70px]">
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <Header />
-
-        <main className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
+        <main className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
           {/* Input Panel */}
           <div>
             <InputPanel onResult={setResult} />

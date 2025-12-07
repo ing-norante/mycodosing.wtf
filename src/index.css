@@ -3,35 +3,49 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* Neobrutalist Design System for MycoMetric */
-@font-face {
-  font-family: 'Archivo Black';
-  src: url('https://fonts.gstatic.com/s/archivoblack/v21/HTxqL289NzCGg4MzN6KJ7eW6OYsf_Ys.woff2') format('woff2');
-  font-display: swap;
+:root {
+  --background: oklch(95.08% 0.0481 184.07);
+  --secondary-background: oklch(100% 0 0);
+  --foreground: oklch(0% 0 0);
+  --main-foreground: oklch(0% 0 0);
+  --main: oklch(78.57% 0.1422 180.36);
+  --border: oklch(0% 0 0);
+  --ring: oklch(0% 0 0);
+  --overlay: oklch(0% 0 0 / 0.8);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --chart-1: #00d6bd;
+  --chart-2: #0099ff;
+  --chart-3: #7a83ff;
+  --chart-4: #ff4d50;
+  --chart-5: #facc00;
+  --chart-active-dot: #000;
+}
+
+.dark {
+  --background: oklch(22.65% 0.0236 198.49);
+  --secondary-background: oklch(23.93% 0 0);
+  --foreground: oklch(92.49% 0 0);
+  --main-foreground: oklch(0% 0 0);
+  --main: oklch(71.47% 0.129261 180.4742);
+  --border: oklch(0% 0 0);
+  --ring: oklch(100% 0 0);
+  --shadow: 4px 4px 0px 0px var(--border);
+  --chart-1: #00bda7;
+  --chart-2: #008ae5;
+  --chart-3: #7a83ff;
+  --chart-4: #ff6669;
+  --chart-5: #e0b700;
+  --chart-active-dot: #fff;
 }
 
 @theme inline {
-  --radius-sm: 0;
-  --radius-md: 0;
-  --radius-lg: 0;
-  --radius-xl: 0;
+  --color-main: var(--main);
   --color-background: var(--background);
+  --color-secondary-background: var(--secondary-background);
   --color-foreground: var(--foreground);
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-destructive: var(--destructive);
+  --color-main-foreground: var(--main-foreground);
   --color-border: var(--border);
-  --color-input: var(--input);
+  --color-overlay: var(--overlay);
   --color-ring: var(--ring);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
@@ -39,229 +53,27 @@
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
 
-  /* Severity colors */
-  --color-severity-info: var(--severity-info);
-  --color-severity-caution: var(--severity-caution);
-  --color-severity-warning: var(--severity-warning);
-  --color-severity-danger: var(--severity-danger);
-
-  /* Font family */
-  --font-display: 'Archivo Black', 'Impact', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', 'Fira Code', monospace;
-}
-
-:root {
-  --radius: 0;
-
-  /* Dark mode by default - underground/hacker aesthetic */
-  --background: #0a0a0a;
-  --foreground: #f8f8f8;
-  --card: #141414;
-  --card-foreground: #f8f8f8;
-  --popover: #141414;
-  --popover-foreground: #f8f8f8;
-  --primary: #00ff88;
-  --primary-foreground: #000000;
-  --secondary: #1a1a1a;
-  --secondary-foreground: #f8f8f8;
-  --muted: #1a1a1a;
-  --muted-foreground: #888888;
-  --accent: #00ff88;
-  --accent-foreground: #000000;
-  --destructive: #f44336;
-  --border: #333333;
-  --input: #1a1a1a;
-  --ring: #00ff88;
-
-  /* Severity colors for warnings */
-  --severity-info: #6b7280;
-  --severity-caution: #ffd600;
-  --severity-warning: #ff9800;
-  --severity-danger: #f44336;
-
-  /* Confidence colors */
-  --confidence-high: #00ff88;
-  --confidence-moderate: #ffd600;
-  --confidence-low: #ff9800;
-  --confidence-very-low: #f44336;
-}
-
-/* Light mode variant */
-.light {
-  --background: #f5f5f5;
-  --foreground: #000000;
-  --card: #ffffff;
-  --card-foreground: #000000;
-  --popover: #ffffff;
-  --popover-foreground: #000000;
-  --primary: #00cc6a;
-  --primary-foreground: #000000;
-  --secondary: #e8e8e8;
-  --secondary-foreground: #000000;
-  --muted: #e8e8e8;
-  --muted-foreground: #555555;
-  --accent: #00cc6a;
-  --accent-foreground: #000000;
-  --destructive: #d32f2f;
-  --border: #000000;
-  --input: #ffffff;
-  --ring: #00cc6a;
+  --spacing-boxShadowX: 4px;
+  --spacing-boxShadowY: 4px;
+  --spacing-reverseBoxShadowX: -4px;
+  --spacing-reverseBoxShadowY: -4px;
+  --radius-base: 0px;
+  --shadow-shadow: var(--shadow);
+  --font-weight-base: 500;
+  --font-weight-heading: 800;
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
   body {
-    @apply bg-background text-foreground;
-    font-family: 'JetBrains Mono', 'IBM Plex Mono', 'Fira Code', monospace;
-    font-feature-settings: 'liga' 1, 'calt' 1;
+    @apply text-foreground font-base bg-background;
   }
 
-  /* Neobrutalist borders - thick and black */
-  .brutalist-border {
-    border: 3px solid currentColor;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
   }
-
-  .brutalist-card {
-    border: 3px solid var(--border);
-    background: var(--card);
-    padding: 1.5rem;
-  }
-
-  /* Typography */
-  h1, h2, h3, .heading {
-    font-family: 'Archivo Black', 'Impact', system-ui, sans-serif;
-    text-transform: uppercase;
-    letter-spacing: -0.02em;
-    line-height: 0.95;
-  }
-
-  /* Selection */
-  ::selection {
-    background: var(--primary);
-    color: var(--primary-foreground);
-  }
-}
-
-/* Custom slider track */
-input[type="range"] {
-  -webkit-appearance: none;
-  appearance: none;
-  background: transparent;
-  cursor: pointer;
-  width: 100%;
-}
-
-input[type="range"]::-webkit-slider-runnable-track {
-  background: var(--border);
-  height: 8px;
-  border: 2px solid var(--foreground);
-}
-
-input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  margin-top: -10px;
-  background-color: var(--primary);
-  height: 28px;
-  width: 28px;
-  border: 3px solid var(--foreground);
-}
-
-input[type="range"]::-moz-range-track {
-  background: var(--border);
-  height: 8px;
-  border: 2px solid var(--foreground);
-}
-
-input[type="range"]::-moz-range-thumb {
-  background-color: var(--primary);
-  height: 24px;
-  width: 24px;
-  border: 3px solid var(--foreground);
-  border-radius: 0;
-}
-
-/* Custom checkbox */
-input[type="checkbox"] {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 24px;
-  height: 24px;
-  border: 3px solid var(--foreground);
-  background: var(--background);
-  cursor: pointer;
-  position: relative;
-  flex-shrink: 0;
-}
-
-input[type="checkbox"]:checked {
-  background: var(--primary);
-}
-
-input[type="checkbox"]:checked::after {
-  content: '✓';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--primary-foreground);
-  font-weight: bold;
-  font-size: 14px;
-}
-
-/* Custom select */
-select {
-  -webkit-appearance: none;
-  appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23f8f8f8' stroke-width='3' stroke-linecap='square' stroke-linejoin='miter'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  background-size: 16px;
-  padding-right: 48px;
-}
-
-/* Custom number input */
-input[type="number"] {
-  -moz-appearance: textfield;
-}
-
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Animations */
-@keyframes pulse-glow {
-  0%, 100% {
-    box-shadow: 0 0 0 0 var(--primary);
-  }
-  50% {
-    box-shadow: 0 0 20px 4px var(--primary);
-  }
-}
-
-.pulse-glow {
-  animation: pulse-glow 2s ease-in-out infinite;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 12px;
-}
-
-::-webkit-scrollbar-track {
-  background: var(--background);
-  border-left: 3px solid var(--border);
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border: 2px solid var(--background);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--muted-foreground);
 }
