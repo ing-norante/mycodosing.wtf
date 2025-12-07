@@ -1,6 +1,8 @@
 import { cn } from "@/lib/utils";
 import type { IntensityLevel } from "@/lib/calculator";
 import { getIntensityLevels } from "@/lib/calculator";
+import { Label } from "@/components/ui/label";
+import { Slider } from "@/components/ui/slider";
 
 const INTENSITY_DESCRIPTIONS: Record<IntensityLevel, string> = {
   microdose: "Sub-perceptual. Fadiman protocol. No impairment expected.",
@@ -8,7 +10,8 @@ const INTENSITY_DESCRIPTIONS: Record<IntensityLevel, string> = {
   light: "Mild psychedelic effects. Enhanced senses, light visuals.",
   moderate: "Clear psychedelic state. Noticeable visuals, introspection.",
   strong: "Similar to doses used in clinical depression/anxiety trials.",
-  heroic: "Very intense. High risk of overwhelming experiences. Sitter mandatory.",
+  heroic:
+    "Very intense. High risk of overwhelming experiences. Sitter mandatory.",
 };
 
 interface IntensitySelectorProps {
@@ -20,36 +23,32 @@ export function IntensitySelector({ value, onChange }: IntensitySelectorProps) {
   const levels = getIntensityLevels();
   const currentIndex = levels.findIndex((l) => l.level === value);
 
-  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const index = parseInt(e.target.value);
-    onChange(levels[index].level);
-  };
-
   return (
     <div className="space-y-4">
-      <label className="block text-xs uppercase tracking-widest text-muted-foreground">
+      <Label
+        htmlFor="intensity-level"
+        className="mb-2 block text-xs tracking-widest uppercase"
+      >
         Intensity Level
-      </label>
+      </Label>
 
       {/* Current Level Display */}
-      <div className="flex items-baseline gap-3">
-        <span className="text-3xl sm:text-4xl font-black text-primary">
+      <div className="flex items-baseline justify-between gap-3">
+        <span className="text-main text-3xl font-black sm:text-4xl">
           {levels[currentIndex]?.label.toUpperCase()}
         </span>
-        <span className="text-lg text-muted-foreground font-mono">
+        <span className="text-foreground font-mono text-lg">
           {levels[currentIndex]?.rangeDescription}
         </span>
       </div>
 
       {/* Slider */}
       <div className="space-y-2">
-        <input
-          type="range"
-          min={0}
+        <Slider
           max={levels.length - 1}
-          value={currentIndex}
-          onChange={handleSliderChange}
-          className="w-full h-8"
+          step={1}
+          value={[currentIndex]}
+          onValueChange={(value) => onChange(levels[value[0]].level)}
         />
 
         {/* Level markers */}
@@ -59,10 +58,10 @@ export function IntensitySelector({ value, onChange }: IntensitySelectorProps) {
               key={level.level}
               onClick={() => onChange(level.level)}
               className={cn(
-                "text-xs font-bold uppercase cursor-pointer transition-colors px-1",
+                "cursor-pointer px-1 text-xs font-bold uppercase transition-colors",
                 i === currentIndex
-                  ? "text-primary"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "text-main"
+                  : "text-muted-foreground hover:text-foreground",
               )}
             >
               {level.level.slice(0, 3)}
@@ -74,16 +73,16 @@ export function IntensitySelector({ value, onChange }: IntensitySelectorProps) {
       {/* Description */}
       <div
         className={cn(
-          "brutalist-card text-sm",
-          value === "heroic" && "border-severity-danger bg-severity-danger/10",
-          value === "strong" && "border-severity-warning bg-severity-warning/10"
+          "border-border shadow-shadow rounded-none border-2 px-4 py-3 text-sm",
+          value === "heroic" && "border-red-600 bg-red-600/10",
+          value === "strong" && "border-yellow-500 bg-yellow-500/10",
         )}
       >
         <span
           className={cn(
             "font-bold",
-            value === "heroic" && "text-severity-danger",
-            value === "strong" && "text-severity-warning"
+            value === "heroic" && "text-red-600",
+            value === "strong" && "text-yellow-600",
           )}
         >
           {value === "heroic" && "⚠ "}
@@ -94,4 +93,3 @@ export function IntensitySelector({ value, onChange }: IntensitySelectorProps) {
     </div>
   );
 }
-

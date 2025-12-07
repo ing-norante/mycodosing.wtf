@@ -15,9 +15,8 @@ function App() {
         <Header />
         <main className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
           {/* Input Panel */}
-          <div>
-            <InputPanel onResult={setResult} />
-          </div>
+
+          <InputPanel onResult={setResult} />
 
           {/* Result Panel */}
           <div className="lg:sticky lg:top-8 lg:self-start">

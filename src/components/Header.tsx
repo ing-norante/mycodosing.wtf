@@ -5,12 +5,12 @@ export function Header() {
         {/* Left side - Title */}
         <div className="flex-1">
           <h1 className="mb-2 text-5xl leading-none font-black tracking-tight sm:text-6xl lg:text-7xl">
-            <span className="text-primary">MYCO</span>METRIC
+            <span className="text-main">MYCO</span>METRIC
           </h1>
           <p className="text-lg font-medium tracking-wide sm:text-xl">
             Research-informed psychedelic dosage calculator
           </p>
-          <p className="border-primary mt-2 border-l-4 pl-3 text-sm">
+          <p className="border-main mt-2 border-l-4 pl-3 text-sm">
             Educational tool — not medical advice
           </p>
         </div>

@@ -23,15 +23,17 @@ export function InputPanel({ onResult }: InputPanelProps) {
   const [intensity, setIntensity] = useState<IntensityLevel>("moderate");
 
   // Advanced inputs
-  const [bodyWeightKg, setBodyWeightKg] = useState<number | undefined>(undefined);
+  const [bodyWeightKg, setBodyWeightKg] = useState<number | undefined>(
+    undefined,
+  );
   const [useWeightAdjustment, setUseWeightAdjustment] = useState(false);
   const [onMAOI, setOnMAOI] = useState(false);
   const [lastDosePsilocybinMg, setLastDosePsilocybinMg] = useState<
     number | undefined
   >(undefined);
-  const [daysSinceLastDose, setDaysSinceLastDose] = useState<number | undefined>(
-    undefined
-  );
+  const [daysSinceLastDose, setDaysSinceLastDose] = useState<
+    number | undefined
+  >(undefined);
   const [dryingQuality, setDryingQuality] = useState<
     "optimal" | "average" | "poor"
   >("average");
@@ -81,14 +83,14 @@ export function InputPanel({ onResult }: InputPanelProps) {
     <div className="space-y-6">
       {/* Session Setup Card */}
       <div className="brutalist-card">
-        <h2 className="text-xl font-black uppercase tracking-wider mb-6 pb-3 border-b-3 border-foreground">
+        <h2 className="border-foreground mb-6 border-b-3 pb-3 text-xl font-black tracking-wider uppercase">
           Session Setup
         </h2>
 
         <div className="space-y-8">
           {/* Substance Selection */}
           <section>
-            <h3 className="text-xs uppercase tracking-widest text-muted-foreground mb-4">
+            <h3 className="text-muted-foreground mb-4 text-xs tracking-widest uppercase">
               1. Select Substance
             </h3>
             <SubstanceSelector value={substance} onChange={setSubstance} />
@@ -96,7 +98,7 @@ export function InputPanel({ onResult }: InputPanelProps) {
 
           {/* Intensity Selection */}
           <section>
-            <h3 className="text-xs uppercase tracking-widest text-muted-foreground mb-4">
+            <h3 className="text-muted-foreground mb-4 text-xs tracking-widest uppercase">
               2. Choose Intensity
             </h3>
             <IntensitySelector value={intensity} onChange={setIntensity} />
@@ -126,11 +128,10 @@ export function InputPanel({ onResult }: InputPanelProps) {
       {/* Calculate Button */}
       <button
         onClick={handleCalculate}
-        className="w-full py-4 px-6 bg-primary text-primary-foreground font-black text-xl uppercase tracking-wider border-3 border-foreground hover:brightness-110 active:brightness-90 transition-all cursor-pointer"
+        className="bg-main text-main-foreground border-foreground w-full cursor-pointer border-3 px-6 py-4 text-xl font-black tracking-wider uppercase transition-all hover:brightness-110 active:brightness-90"
       >
         Calculate Dose
       </button>
     </div>
   );
 }
-

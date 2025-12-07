@@ -1,22 +1,34 @@
-import { cn } from "@/lib/utils";
 import type {
   DosageInput,
-  MaterialForm,
   SclerotiaSpecies,
   Species,
   SubstanceCategory,
-  SyntheticCompound,
 } from "@/lib/calculator";
 import { getSpeciesList, getSyntheticList } from "@/lib/calculator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { SpeciesAndFormSelector } from "./SpeciesAndFormSelector";
+import { SyntheticCompoundSelector } from "./SyntheticCompoundSelector";
 
 const SUBSTANCE_TYPES: {
   id: SubstanceCategory;
   label: string;
   description: string;
 }[] = [
-  { id: "mushroom", label: "MUSHROOMS", description: "Psilocybin-containing fungi" },
-  { id: "sclerotia", label: "SCLEROTIA", description: "Truffles / philosopher's stones" },
-  { id: "synthetic", label: "SYNTHETIC", description: "4-AcO-DMT, 4-HO-MET, 4-AcO-MET" },
+  {
+    id: "mushroom",
+    label: "MUSHROOMS",
+    description: "Psilocybin-containing fungi",
+  },
+  {
+    id: "sclerotia",
+    label: "SCLEROTIA",
+    description: "Truffles / philosopher's stones",
+  },
+  {
+    id: "synthetic",
+    label: "SYNTHETIC",
+    description: "4-AcO-DMT, 4-HO-MET, 4-AcO-MET",
+  },
 ];
 
 interface SubstanceSelectorProps {
@@ -29,18 +41,21 @@ export function SubstanceSelector({ value, onChange }: SubstanceSelectorProps) {
   const syntheticList = getSyntheticList();
 
   const mushroomSpecies = speciesList.filter((s) => s.category === "mushroom");
-  const sclerotiaSpecies = speciesList.filter((s) => s.category === "sclerotia");
+  const sclerotiaSpecies = speciesList.filter(
+    (s) => s.category === "sclerotia",
+  );
 
   const currentType = value.type;
 
-  const handleTypeChange = (type: SubstanceCategory) => {
-    if (type === "mushroom") {
+  const handleTypeChange = (type: string) => {
+    const category = type as SubstanceCategory;
+    if (category === "mushroom") {
       onChange({
         type: "mushroom",
         species: "psilocybe_cubensis" as Species,
         form: "dried",
       });
-    } else if (type === "sclerotia") {
+    } else if (category === "sclerotia") {
       onChange({
         type: "sclerotia",
         species: "psilocybe_tampanensis_sclerotia" as SclerotiaSpecies,
@@ -55,187 +70,67 @@ export function SubstanceSelector({ value, onChange }: SubstanceSelectorProps) {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Substance Type Selector */}
-      <div>
-        <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-3">
-          Substance Type
-        </label>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-          {SUBSTANCE_TYPES.map((type) => (
-            <button
-              key={type.id}
-              onClick={() => handleTypeChange(type.id)}
-              className={cn(
-                "brutalist-card text-left transition-all hover:bg-secondary cursor-pointer",
-                currentType === type.id && "bg-primary text-primary-foreground hover:bg-primary"
-              )}
-            >
-              <span className="block font-bold text-lg">{type.label}</span>
-              <span
-                className={cn(
-                  "text-xs",
-                  currentType === type.id
-                    ? "text-primary-foreground/70"
-                    : "text-muted-foreground"
-                )}
-              >
+    <Tabs value={currentType} onValueChange={handleTypeChange}>
+      <TabsList className="bg-background size-auto w-full items-center justify-between">
+        {SUBSTANCE_TYPES.map((type) => (
+          <TabsTrigger
+            key={type.id}
+            value={type.id}
+            className="bg-background size-20 w-full lg:size-40"
+          >
+            <div className="flex flex-col items-center justify-center gap-1">
+              <span className="text-sm font-bold uppercase lg:text-lg">
+                {type.label}
+              </span>
+              <span className="text-xs text-wrap lg:text-xs">
                 {type.description}
               </span>
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Species/Compound Selection */}
-      {currentType === "mushroom" && value.type === "mushroom" && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-2">
-              Species
-            </label>
-            <select
-              value={value.species}
-              onChange={(e) =>
-                onChange({
-                  ...value,
-                  species: e.target.value as Species,
-                })
-              }
-              className="w-full brutalist-card bg-input text-foreground cursor-pointer hover:bg-secondary transition-colors"
-            >
-              {mushroomSpecies.map((species) => (
-                <option key={species.id} value={species.id}>
-                  {species.name} ({species.relativePotency.toFixed(1)}x)
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-2">
-              Form
-            </label>
-            <div className="flex gap-0">
-              <button
-                onClick={() => onChange({ ...value, form: "dried" })}
-                className={cn(
-                  "flex-1 py-3 px-4 border-3 border-foreground font-bold transition-colors cursor-pointer",
-                  value.form === "dried"
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-card hover:bg-secondary"
-                )}
-              >
-                DRIED
-              </button>
-              <button
-                onClick={() => onChange({ ...value, form: "fresh" })}
-                className={cn(
-                  "flex-1 py-3 px-4 border-3 border-foreground border-l-0 font-bold transition-colors cursor-pointer",
-                  value.form === "fresh"
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-card hover:bg-secondary"
-                )}
-              >
-                FRESH
-              </button>
             </div>
-          </div>
-        </div>
-      )}
+          </TabsTrigger>
+        ))}
+      </TabsList>
 
-      {currentType === "sclerotia" && value.type === "sclerotia" && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-2">
-              Species
-            </label>
-            <select
-              value={value.species}
-              onChange={(e) =>
-                onChange({
-                  ...value,
-                  species: e.target.value as SclerotiaSpecies,
-                })
-              }
-              className="w-full brutalist-card bg-input text-foreground cursor-pointer hover:bg-secondary transition-colors"
-            >
-              {sclerotiaSpecies.map((species) => (
-                <option key={species.id} value={species.id}>
-                  {species.name} ({species.relativePotency.toFixed(1)}x)
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-2">
-              Form
-            </label>
-            <div className="flex gap-0">
-              <button
-                onClick={() => onChange({ ...value, form: "fresh" as MaterialForm })}
-                className={cn(
-                  "flex-1 py-3 px-4 border-3 border-foreground font-bold transition-colors cursor-pointer",
-                  value.form === "fresh"
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-card hover:bg-secondary"
-                )}
-              >
-                FRESH
-              </button>
-              <button
-                onClick={() => onChange({ ...value, form: "dried" as MaterialForm })}
-                className={cn(
-                  "flex-1 py-3 px-4 border-3 border-foreground border-l-0 font-bold transition-colors cursor-pointer",
-                  value.form === "dried"
-                    ? "bg-primary text-primary-foreground"
-                    : "bg-card hover:bg-secondary"
-                )}
-              >
-                DRIED
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      <TabsContent value="mushroom">
+        {value.type === "mushroom" && (
+          <SpeciesAndFormSelector
+            speciesList={mushroomSpecies}
+            selectedSpecies={value.species}
+            form={value.form}
+            onSpeciesChange={(species) =>
+              onChange({ ...value, species: species as Species })
+            }
+            onFormChange={(form) => onChange({ ...value, form })}
+            label="Species"
+          />
+        )}
+      </TabsContent>
 
-      {currentType === "synthetic" && value.type === "synthetic" && (
-        <div>
-          <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-3">
-            Compound
-          </label>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {syntheticList.map((synth) => (
-              <button
-                key={synth.id}
-                onClick={() =>
-                  onChange({
-                    type: "synthetic",
-                    compound: synth.id as SyntheticCompound,
-                  })
-                }
-                className={cn(
-                  "brutalist-card text-left transition-all hover:bg-secondary cursor-pointer",
-                  value.compound === synth.id &&
-                    "bg-primary text-primary-foreground hover:bg-primary"
-                )}
-              >
-                <span className="block font-bold">{synth.name.split(" ")[0]}</span>
-                <span
-                  className={cn(
-                    "text-xs",
-                    value.compound === synth.id
-                      ? "text-primary-foreground/70"
-                      : "text-muted-foreground"
-                  )}
-                >
-                  {synth.equivalentRatio.toFixed(1)}x psilocybin equiv.
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
+      <TabsContent value="sclerotia">
+        {value.type === "sclerotia" && (
+          <SpeciesAndFormSelector
+            speciesList={sclerotiaSpecies}
+            selectedSpecies={value.species}
+            form={value.form}
+            onSpeciesChange={(species) =>
+              onChange({ ...value, species: species as SclerotiaSpecies })
+            }
+            onFormChange={(form) => onChange({ ...value, form })}
+            label="Species"
+          />
+        )}
+      </TabsContent>
+
+      <TabsContent value="synthetic">
+        {value.type === "synthetic" && (
+          <SyntheticCompoundSelector
+            compounds={syntheticList}
+            selectedCompound={value.compound}
+            onCompoundChange={(compound) =>
+              onChange({ type: "synthetic", compound })
+            }
+          />
+        )}
+      </TabsContent>
+    </Tabs>
   );
 }
-

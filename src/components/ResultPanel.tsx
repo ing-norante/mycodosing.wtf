@@ -12,54 +12,58 @@ function DoseSummary({ result }: { result: DosageResult }) {
 
   return (
     <div className="brutalist-card">
-      <h3 className="text-xs uppercase tracking-widest text-muted-foreground mb-4">
+      <h3 className="text-muted-foreground mb-4 text-xs tracking-widest uppercase">
         Recommended Dose
       </h3>
 
-      <div className="text-sm text-muted-foreground mb-2">
+      <div className="text-muted-foreground mb-2 text-sm">
         Dose range ({unit === "g" ? "grams of material" : "mg of compound"})
       </div>
 
-      <div className="grid grid-cols-3 gap-4 mb-6">
+      <div className="mb-6 grid grid-cols-3 gap-4">
         <div className="text-center">
-          <div className="text-xs uppercase text-muted-foreground mb-1">Min</div>
-          <div className="text-3xl sm:text-4xl font-black font-mono text-muted-foreground">
+          <div className="text-muted-foreground mb-1 text-xs uppercase">
+            Min
+          </div>
+          <div className="text-muted-foreground font-mono text-3xl font-black sm:text-4xl">
             {amount.min}
           </div>
-          <div className="text-sm font-mono">{unit}</div>
+          <div className="font-mono text-sm">{unit}</div>
         </div>
-        <div className="text-center border-x-3 border-primary">
-          <div className="text-xs uppercase text-primary mb-1">Median</div>
-          <div className="text-4xl sm:text-5xl font-black font-mono text-primary">
+        <div className="border-main border-x-3 text-center">
+          <div className="text-main mb-1 text-xs uppercase">Median</div>
+          <div className="text-main font-mono text-4xl font-black sm:text-5xl">
             {amount.median}
           </div>
-          <div className="text-sm font-mono text-primary">{unit}</div>
+          <div className="text-main font-mono text-sm">{unit}</div>
         </div>
         <div className="text-center">
-          <div className="text-xs uppercase text-muted-foreground mb-1">Max</div>
-          <div className="text-3xl sm:text-4xl font-black font-mono text-muted-foreground">
+          <div className="text-muted-foreground mb-1 text-xs uppercase">
+            Max
+          </div>
+          <div className="text-muted-foreground font-mono text-3xl font-black sm:text-4xl">
             {amount.max}
           </div>
-          <div className="text-sm font-mono">{unit}</div>
+          <div className="font-mono text-sm">{unit}</div>
         </div>
       </div>
 
       {/* Psilocybin Equivalent */}
-      <div className="border-t-3 border-border pt-4">
-        <div className="text-xs uppercase text-muted-foreground mb-2">
+      <div className="border-border border-t-3 pt-4">
+        <div className="text-muted-foreground mb-2 text-xs uppercase">
           Psilocybin-equivalent (mg)
         </div>
         <div className="flex items-baseline gap-4 font-mono">
           <span className="text-muted-foreground">
             {psilocybinEquivalentMg.min}
           </span>
-          <span className="text-lg font-bold text-primary">
+          <span className="text-main text-lg font-bold">
             {psilocybinEquivalentMg.median}
           </span>
           <span className="text-muted-foreground">
             {psilocybinEquivalentMg.max}
           </span>
-          <span className="text-xs text-muted-foreground">mg</span>
+          <span className="text-muted-foreground text-xs">mg</span>
         </div>
       </div>
     </div>
@@ -70,42 +74,66 @@ function DoseSummary({ result }: { result: DosageResult }) {
 // Breakdown Table Component
 // ============================================================================
 
-const CONFIDENCE_STYLES: Record<ConfidenceLevel, { bg: string; text: string; label: string }> = {
-  high: { bg: "bg-confidence-high/20", text: "text-confidence-high", label: "HIGH" },
-  moderate: { bg: "bg-severity-caution/20", text: "text-severity-caution", label: "MODERATE" },
-  low: { bg: "bg-severity-warning/20", text: "text-severity-warning", label: "LOW" },
-  very_low: { bg: "bg-severity-danger/20", text: "text-severity-danger", label: "VERY LOW" },
+const CONFIDENCE_STYLES: Record<
+  ConfidenceLevel,
+  { bg: string; text: string; label: string }
+> = {
+  high: {
+    bg: "bg-confidence-high/20",
+    text: "text-confidence-high",
+    label: "HIGH",
+  },
+  moderate: {
+    bg: "bg-severity-caution/20",
+    text: "text-severity-caution",
+    label: "MODERATE",
+  },
+  low: {
+    bg: "bg-severity-warning/20",
+    text: "text-severity-warning",
+    label: "LOW",
+  },
+  very_low: {
+    bg: "bg-severity-danger/20",
+    text: "text-severity-danger",
+    label: "VERY LOW",
+  },
 };
 
 function BreakdownTable({ result }: { result: DosageResult }) {
   const { calculationBreakdown, toleranceMultiplier, confidence } = result;
-  const { baseTargetMg, afterWeightAdjustment, afterTolerance, afterMAOI, potencyMgPerG } =
-    calculationBreakdown;
+  const {
+    baseTargetMg,
+    afterWeightAdjustment,
+    afterTolerance,
+    afterMAOI,
+    potencyMgPerG,
+  } = calculationBreakdown;
 
   const confidenceStyle = CONFIDENCE_STYLES[confidence];
 
   return (
     <div className="brutalist-card">
-      <h3 className="text-xs uppercase tracking-widest text-muted-foreground mb-4">
+      <h3 className="text-muted-foreground mb-4 text-xs tracking-widest uppercase">
         Model Insight
       </h3>
 
       <table className="w-full text-sm">
-        <tbody className="divide-y divide-border">
+        <tbody className="divide-border divide-y">
           <tr>
-            <td className="py-2 text-muted-foreground">Base target</td>
+            <td className="text-muted-foreground py-2">Base target</td>
             <td className="py-2 text-right font-mono font-bold">
               {baseTargetMg} mg
             </td>
           </tr>
           <tr>
-            <td className="py-2 text-muted-foreground">After weight adjust</td>
+            <td className="text-muted-foreground py-2">After weight adjust</td>
             <td className="py-2 text-right font-mono">
               {afterWeightAdjustment} mg
             </td>
           </tr>
           <tr>
-            <td className="py-2 text-muted-foreground">
+            <td className="text-muted-foreground py-2">
               After tolerance{" "}
               {toleranceMultiplier > 1 && (
                 <span className="text-severity-warning">
@@ -116,13 +144,13 @@ function BreakdownTable({ result }: { result: DosageResult }) {
             <td className="py-2 text-right font-mono">{afterTolerance} mg</td>
           </tr>
           <tr>
-            <td className="py-2 text-muted-foreground">After MAOI</td>
-            <td className="py-2 text-right font-mono font-bold text-primary">
+            <td className="text-muted-foreground py-2">After MAOI</td>
+            <td className="text-main py-2 text-right font-mono font-bold">
               {afterMAOI} mg
             </td>
           </tr>
           <tr>
-            <td className="py-2 text-muted-foreground">Effective potency</td>
+            <td className="text-muted-foreground py-2">Effective potency</td>
             <td className="py-2 text-right font-mono text-xs">
               {potencyMgPerG.min}–{potencyMgPerG.max} mg/g
             </td>
@@ -131,16 +159,16 @@ function BreakdownTable({ result }: { result: DosageResult }) {
       </table>
 
       {/* Confidence Badge */}
-      <div className="mt-4 pt-4 border-t border-border">
+      <div className="border-border mt-4 border-t pt-4">
         <div className="flex items-center gap-3">
-          <span className="text-xs uppercase text-muted-foreground">
+          <span className="text-muted-foreground text-xs uppercase">
             Confidence:
           </span>
           <span
             className={cn(
-              "px-3 py-1 font-bold text-sm border-2 border-current",
+              "border-2 border-current px-3 py-1 text-sm font-bold",
               confidenceStyle.bg,
-              confidenceStyle.text
+              confidenceStyle.text,
             )}
           >
             {confidenceStyle.label}
@@ -156,10 +184,26 @@ function BreakdownTable({ result }: { result: DosageResult }) {
 // ============================================================================
 
 const SEVERITY_STYLES = {
-  info: { bg: "bg-severity-info/20", border: "border-severity-info", icon: "ℹ" },
-  caution: { bg: "bg-severity-caution/20", border: "border-severity-caution", icon: "⚡" },
-  warning: { bg: "bg-severity-warning/20", border: "border-severity-warning", icon: "⚠" },
-  danger: { bg: "bg-severity-danger/20", border: "border-severity-danger", icon: "🚨" },
+  info: {
+    bg: "bg-severity-info/20",
+    border: "border-severity-info",
+    icon: "ℹ",
+  },
+  caution: {
+    bg: "bg-severity-caution/20",
+    border: "border-severity-caution",
+    icon: "⚡",
+  },
+  warning: {
+    bg: "bg-severity-warning/20",
+    border: "border-severity-warning",
+    icon: "⚠",
+  },
+  danger: {
+    bg: "bg-severity-danger/20",
+    border: "border-severity-danger",
+    icon: "🚨",
+  },
 };
 
 function WarningsList({ result }: { result: DosageResult }) {
@@ -169,23 +213,19 @@ function WarningsList({ result }: { result: DosageResult }) {
 
   return (
     <div className="brutalist-card">
-      <h3 className="text-xs uppercase tracking-widest text-muted-foreground mb-4">
+      <h3 className="text-muted-foreground mb-4 text-xs tracking-widest uppercase">
         Warnings & Notes
       </h3>
 
       {/* Warnings */}
       {warnings.length > 0 && (
-        <div className="space-y-2 mb-4">
+        <div className="mb-4 space-y-2">
           {warnings.map((warning, i) => {
             const style = SEVERITY_STYLES[warning.severity];
             return (
               <div
                 key={i}
-                className={cn(
-                  "p-3 border-l-4 text-sm",
-                  style.bg,
-                  style.border
-                )}
+                className={cn("border-l-4 p-3 text-sm", style.bg, style.border)}
               >
                 <span className="mr-2">{style.icon}</span>
                 {warning.message}
@@ -197,7 +237,7 @@ function WarningsList({ result }: { result: DosageResult }) {
 
       {/* Notes */}
       {notes.length > 0 && (
-        <ul className="space-y-1 text-sm text-muted-foreground list-disc list-inside">
+        <ul className="text-muted-foreground list-inside list-disc space-y-1 text-sm">
           {notes.map((note, i) => (
             <li key={i}>{note}</li>
           ))}
@@ -221,15 +261,15 @@ function CitationsList({ result }: { result: DosageResult }) {
     <div className="brutalist-card">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between cursor-pointer"
+        className="flex w-full cursor-pointer items-center justify-between"
       >
-        <h3 className="text-xs uppercase tracking-widest text-muted-foreground">
+        <h3 className="text-muted-foreground text-xs tracking-widest uppercase">
           References ({citations.length})
         </h3>
         {isOpen ? (
-          <ChevronUp className="w-4 h-4 text-muted-foreground" />
+          <ChevronUp className="text-muted-foreground h-4 w-4" />
         ) : (
-          <ChevronDown className="w-4 h-4 text-muted-foreground" />
+          <ChevronDown className="text-muted-foreground h-4 w-4" />
         )}
       </button>
 
@@ -241,7 +281,7 @@ function CitationsList({ result }: { result: DosageResult }) {
                 {cite.authors} ({cite.year})
               </span>
               <span className="text-muted-foreground"> — {cite.title}</span>
-              <p className="text-xs text-muted-foreground mt-1 pl-4 border-l-2 border-border">
+              <p className="text-muted-foreground border-border mt-1 border-l-2 pl-4 text-xs">
                 Relevance: {cite.relevance}
               </p>
             </div>
@@ -263,9 +303,9 @@ interface ResultPanelProps {
 export function ResultPanel({ result }: ResultPanelProps) {
   if (!result) {
     return (
-      <div className="brutalist-card flex flex-col items-center justify-center min-h-[400px] text-center">
-        <div className="text-6xl mb-4 opacity-30">🍄</div>
-        <h3 className="text-xl font-bold uppercase mb-2">
+      <div className="brutalist-card flex min-h-[400px] flex-col items-center justify-center text-center">
+        <div className="mb-4 text-6xl opacity-30">🍄</div>
+        <h3 className="mb-2 text-xl font-bold uppercase">
           Configure your session
         </h3>
         <p className="text-muted-foreground max-w-sm">
@@ -285,4 +325,3 @@ export function ResultPanel({ result }: ResultPanelProps) {
     </div>
   );
 }
-
