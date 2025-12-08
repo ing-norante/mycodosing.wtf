@@ -164,7 +164,7 @@ export function SpeciesAndFormSelector({
 }: SpeciesAndFormSelectorProps) {
   return (
     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-      <div>
+      <div className="col-span-2 sm:col-span-1">
         <Label
           htmlFor="species"
           className="mb-2 block text-xs tracking-widest uppercase"
@@ -199,7 +199,7 @@ export function SpeciesAndFormSelector({
           </SelectContent>
         </Select>
       </div>
-      <div>
+      <div className="col-span-2 sm:col-span-1">
         <Label
           htmlFor="form"
           className="mb-2 block text-xs tracking-widest uppercase"
@@ -208,7 +208,7 @@ export function SpeciesAndFormSelector({
         </Label>
         <FormSelector value={form} onChange={onFormChange} />
       </div>
-      <div className="col-span-2">
+      <div className="col-span-2 col-start-1">
         <ImageCard
           caption={`${formatSpeciesName(selectedSpecies)} (${form})`}
           imageUrl={getSpeciesImage(selectedSpecies, form)}
