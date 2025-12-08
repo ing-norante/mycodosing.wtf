@@ -98,7 +98,7 @@ export function SubstanceSelector({ value, onChange }: SubstanceSelectorProps) {
               <span className="text-sm font-bold uppercase lg:text-lg">
                 {type.label}
               </span>
-              <span className="text-xs text-wrap lg:text-xs">
+              <span className="text-xs text-wrap lg:text-xs hidden lg:block">
                 {type.description}
               </span>
             </div>
