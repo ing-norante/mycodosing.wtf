@@ -1,6 +1,8 @@
 import { Button } from "@/components/ui/button";
 import type { MaterialForm } from "@/lib/calculator";
 import { cn } from "@/lib/utils";
+import freshImage from "@/assets/fresh.png";
+import driedImage from "@/assets/dried.png";
 
 interface FormSelectorProps {
   value: MaterialForm;
@@ -17,6 +19,7 @@ export function FormSelector({ value, onChange }: FormSelectorProps) {
           value !== "dried" && "bg-transparent",
         )}
       >
+        <img src={driedImage} alt="Dried" className="size-5" />
         DRIED
       </Button>
       <Button
@@ -26,6 +29,7 @@ export function FormSelector({ value, onChange }: FormSelectorProps) {
           value !== "fresh" && "bg-transparent",
         )}
       >
+        <img src={freshImage} alt="Fresh" className="size-5" />
         FRESH
       </Button>
     </div>

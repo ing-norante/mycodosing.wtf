@@ -9,26 +9,33 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { SpeciesAndFormSelector } from "./SpeciesAndFormSelector";
 import { SyntheticCompoundSelector } from "./SyntheticCompoundSelector";
 import { cn } from "@/lib/utils";
+import sclerotiaImage from "@/assets/sclerotia.png";
+import syntheticImage from "@/assets/synthetic.png";
+import mushroomImage from "@/assets/mushroom.png";
 
 const SUBSTANCE_TYPES: {
   id: SubstanceCategory;
   label: string;
   description: string;
+  image: string;
 }[] = [
   {
     id: "mushroom",
     label: "MUSHROOMS",
     description: "Psilocybin-containing fungi",
+    image: mushroomImage,
   },
   {
     id: "sclerotia",
     label: "SCLEROTIA",
     description: "Truffles / philosopher's stones",
+    image: sclerotiaImage,
   },
   {
     id: "synthetic",
     label: "SYNTHETIC",
     description: "4-AcO-DMT, 4-HO-MET, 4-AcO-MET",
+    image: syntheticImage,
   },
 ];
 
@@ -78,13 +85,16 @@ export function SubstanceSelector({ value, onChange }: SubstanceSelectorProps) {
             key={type.id}
             value={type.id}
             className={cn(
-              "bg-background size-20 w-full lg:size-40 shadow-shadow",
+              "bg-background shadow-shadow size-20 w-full lg:size-40",
               type.id === currentType
                 ? "border-border"
                 : "border-border bg-secondary-background/20",
             )}
           >
             <div className="flex flex-col items-center justify-center gap-1">
+              {type.image !== undefined && (
+                <img src={type.image} alt={type.label} className="size-14" />
+              )}
               <span className="text-sm font-bold uppercase lg:text-lg">
                 {type.label}
               </span>

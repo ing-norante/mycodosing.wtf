@@ -20,6 +20,13 @@
 
 export type SubstanceCategory = "mushroom" | "sclerotia" | "synthetic";
 
+export interface SubstanceCategoryData {
+  id: SubstanceCategory;
+  label: string;
+  description: string;
+  image: string;
+}
+
 export type Species =
   | "gymnopilus_purpuratus"
   | "panaeolus_cyanescens"
