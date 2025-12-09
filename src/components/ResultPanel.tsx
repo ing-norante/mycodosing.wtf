@@ -566,6 +566,7 @@ export function ResultPanel({ result, input }: ResultPanelProps) {
       <div className="space-y-4">
         <p className="border-foreground border-l-4 pl-4 text-xl leading-relaxed font-medium">
           No accounts, no servers. <br />
+          No medical advice. <br />
           <span className="bg-yellow-300 px-1 font-bold text-black dark:bg-yellow-400">
             100% client-side.
           </span>

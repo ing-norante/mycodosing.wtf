@@ -1,11 +1,14 @@
 import { Button } from "@/components/ui/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+
 import { HowItWorks } from "@/components/HowItWorks";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
@@ -26,21 +29,24 @@ export function Header() {
             Educational tool — not medical advice
           </p>
         </div>
-        <Dialog>
-          <form>
-            <DialogTrigger asChild>
-              <Button>How It Works</Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle>How It Works</DialogTitle>
-              </DialogHeader>
-              <ScrollArea className="h-[500px]">
-                <HowItWorks />
-              </ScrollArea>
-            </DialogContent>
-          </form>
-        </Dialog>
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button>How It Works</Button>
+          </SheetTrigger>
+          <SheetContent>
+            <SheetHeader>
+              <SheetTitle>How It Works</SheetTitle>
+            </SheetHeader>
+            <ScrollArea>
+              <HowItWorks />
+            </ScrollArea>
+            <SheetFooter>
+              <SheetClose asChild>
+                <Button variant="neutral">Close</Button>
+              </SheetClose>
+            </SheetFooter>
+          </SheetContent>
+        </Sheet>
       </div>
     </header>
   );

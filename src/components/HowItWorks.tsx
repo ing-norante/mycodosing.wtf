@@ -153,7 +153,7 @@ export const HowItWorks = () => {
         </div>
       </section>
 
-      <footer className="mt-12 border-t border-gray-300 pt-6 text-sm text-gray-500">
+      <footer className="border-foreground/80 text-foreground/80 mt-12 border-t pt-6 text-sm">
         <p>
           Based on research by Garcia-Romeu et al. (2021), Gotvaldová et al.
           (2021), and Buchborn et al. (2016).
