@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
-import { InputPanel } from "./components/InputPanel";
-import { ResultPanel } from "./components/ResultPanel";
-import { ThemeProvider } from "./components/ThemeProvider";
-import type { DosageResult } from "./lib/calculator";
-import "./index.css";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { InputPanel } from "@/components/InputPanel";
+import { ResultPanel } from "@/components/ResultPanel";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import type { DosageResult } from "@/lib/calculator";
+import "@/index.css";
 
-import type { DosageInput } from "./lib/calculator";
+import type { DosageInput } from "@/lib/calculator";
 
 function App() {
   const [result, setResult] = useState<DosageResult | null>(null);

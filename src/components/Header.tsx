@@ -1,3 +1,14 @@
+import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { HowItWorks } from "@/components/HowItWorks";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
 export function Header() {
   return (
     <header className="border-foreground mb-8 w-full border-b-3 pb-6">
@@ -15,6 +26,21 @@ export function Header() {
             Educational tool — not medical advice
           </p>
         </div>
+        <Dialog>
+          <form>
+            <DialogTrigger asChild>
+              <Button>How It Works</Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>How It Works</DialogTitle>
+              </DialogHeader>
+              <ScrollArea className="h-[500px]">
+                <HowItWorks />
+              </ScrollArea>
+            </DialogContent>
+          </form>
+        </Dialog>
       </div>
     </header>
   );

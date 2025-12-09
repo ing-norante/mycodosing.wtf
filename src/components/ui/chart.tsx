@@ -55,7 +55,7 @@ function ChartContainer({
         data-chart={chartId}
         className={cn(
           "[&_.recharts-cartesian-axis-tick_text]:fill-foreground [&_.recharts-sector[stroke='#fff']]:stroke-border flex aspect-video justify-center text-xs [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-[#80808080] [&_.recharts-curve.recharts-tooltip-cursor]:stroke-[#80808080] [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-black [&_.recharts-polar-grid_[stroke='#ccc']]:dark:stroke-white [&_.recharts-reference-line_[stroke='#ccc']]:stroke-black [&_.recharts-reference-line_[stroke='#ccc']]:dark:stroke-white [&_.recharts-sector]:outline-hidden [&_.recharts-surface]:outline-hidden",
-          "[&_.recharts-layer_path]:[stroke:var(--color-border)] [&_.recharts-layer_path]:[stroke-width:2] [&_.recharts-layer_path]:[fill-opacity:1]",
+          "[&_.recharts-layer_path]:[stroke:var(--color-border)] [&_.recharts-layer_path]:stroke-2 [&_.recharts-layer_path]:[fill-opacity:1]",
           className,
         )}
         {...props}
@@ -173,7 +173,7 @@ function ChartTooltipContent({
   return (
     <div
       className={cn(
-        "border-border bg-background grid min-w-[8rem] items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-xl",
+        "border-border bg-background grid min-w-32 items-start gap-1.5 rounded-lg border px-2.5 py-1.5 text-xs shadow-xl",
         className,
       )}
     >
