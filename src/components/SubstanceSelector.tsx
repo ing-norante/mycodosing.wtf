@@ -82,13 +82,13 @@ export function SubstanceSelector() {
 
   return (
     <Tabs value={currentType} onValueChange={handleTypeChange}>
-      <TabsList className="bg-background size-auto w-full items-center justify-between border-none">
+      <TabsList className="bg-background size-auto w-full items-center border-none lg:justify-between">
         {SUBSTANCE_TYPES.map((type) => (
           <TabsTrigger
             key={type.id}
             value={type.id}
             className={cn(
-              "bg-background shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY size-20 w-full cursor-pointer hover:shadow-none lg:size-40",
+              "bg-background shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY size-28 cursor-pointer hover:shadow-none lg:h-32 lg:w-60",
               type.id === currentType
                 ? "border-border"
                 : "border-border bg-secondary-background/20",
