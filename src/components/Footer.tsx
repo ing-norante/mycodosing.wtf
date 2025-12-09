@@ -1,4 +1,4 @@
-import { TriangleAlert, Sun, Moon, Monitor, Palette } from "lucide-react";
+import { TriangleAlert, Sun, Moon, Monitor } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -38,14 +38,14 @@ export function Footer() {
           inherent risks and may be illegal in your jurisdiction.
         </p>
       </div>
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="flex w-full items-center justify-between gap-2 sm:w-auto sm:justify-end">
         {/* Color Theme Selector */}
         <Select
           value={colorTheme}
           onValueChange={(v) => setColorTheme(v as ColorTheme)}
         >
-          <SelectTrigger className="w-[130px]">
-            <Palette className="mr-2 size-4" />
+          <SelectTrigger className="w-full sm:w-[130px]">
+            {/* <Palette className="mr-2 size-4" /> */}
             <SelectValue placeholder="Theme" />
           </SelectTrigger>
           <SelectContent>
@@ -56,7 +56,10 @@ export function Footer() {
                   <span className="flex items-center gap-2">
                     <span
                       className="border-foreground/20 inline-block size-3 rounded-full border"
-                      style={{ backgroundColor: theme.color }}
+                      style={{
+                        backgroundColor: theme.color,
+                        borderColor: `var(--background)`,
+                      }}
                     />
                     {theme.label}
                   </span>
@@ -68,10 +71,7 @@ export function Footer() {
 
         {/* Mode Selector */}
         <Select value={mode} onValueChange={(v) => setMode(v as Mode)}>
-          <SelectTrigger className="w-[130px]">
-            {mode === "light" && <Sun className="mr-2 size-4" />}
-            {mode === "dark" && <Moon className="mr-2 size-4" />}
-            {mode === "system" && <Monitor className="mr-2 size-4" />}
+          <SelectTrigger className="w-full sm:w-[130px]">
             <SelectValue placeholder="Mode" />
           </SelectTrigger>
           <SelectContent>

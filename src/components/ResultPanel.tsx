@@ -259,15 +259,25 @@ interface ResultPanelProps {
 export function ResultPanel({ result }: ResultPanelProps) {
   if (!result) {
     return (
-      <div className="flex min-h-[400px] flex-col items-center justify-center text-center">
-        <div className="mb-4 text-6xl opacity-30">🍄</div>
-        <h3 className="mb-2 text-xl font-bold uppercase">
-          Configure your session
-        </h3>
-        <p className="max-w-sm">
-          Select a substance, choose your intensity, and click "Calculate Dose"
-          to see personalized recommendations.
+      <div className="space-y-4">
+        <p className="border-foreground border-l-4 pl-4 text-xl leading-relaxed font-medium">
+          No accounts, no servers. <br />
+          <span className="bg-yellow-300 px-1 font-bold text-black dark:bg-yellow-400">
+            100% client-side.
+          </span>
+          <br />
+          Nothing leaves your browser.
         </p>
+        <Card className="flex min-h-[400px] flex-col items-center justify-center p-4 text-center">
+          <div className="mb-4 text-6xl opacity-50">🍄</div>
+          <h3 className="mb-2 text-xl font-bold uppercase">
+            Configure your session
+          </h3>
+          <p className="max-w-sm">
+            Select a substance, choose your intensity, and click "Calculate
+            Dose" to see personalized recommendations.
+          </p>
+        </Card>
       </div>
     );
   }
