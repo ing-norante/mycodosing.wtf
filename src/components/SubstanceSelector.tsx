@@ -29,14 +29,14 @@ const SUBSTANCE_TYPES: {
   },
   {
     id: "sclerotia",
-    label: "SCLEROTIA",
-    description: "Truffles / philosopher's stones",
+    label: "Truffles",
+    description: "Sclerotia / philosopher's stones",
     image: sclerotiaImage,
   },
   {
     id: "synthetic",
-    label: "SYNTHETIC",
-    description: "4-AcO-DMT, 4-HO-MET, 4-AcO-MET",
+    label: "Synthetic",
+    description: "Edibles / Powders",
     image: syntheticImage,
   },
 ];
@@ -88,7 +88,7 @@ export function SubstanceSelector() {
             key={type.id}
             value={type.id}
             className={cn(
-              "bg-background shadow-shadow size-20 w-full lg:size-40",
+              "bg-background shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY size-20 w-full cursor-pointer hover:shadow-none lg:size-40",
               type.id === currentType
                 ? "border-border"
                 : "border-border bg-secondary-background/20",

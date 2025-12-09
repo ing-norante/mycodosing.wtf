@@ -21,7 +21,7 @@ export function FormSelector({ value, onChange }: FormSelectorProps) {
           posthog.capture("form_changed", { form: "dried" });
         }}
         className={cn(
-          "flex-1 font-semibold transition-colors",
+          "flex-1 cursor-pointer font-semibold transition-colors",
           value !== "dried" && "bg-transparent",
         )}
       >
@@ -39,7 +39,7 @@ export function FormSelector({ value, onChange }: FormSelectorProps) {
           posthog.capture("form_changed", { form: "fresh" });
         }}
         className={cn(
-          "flex-1 font-semibold transition-colors",
+          "flex-1 cursor-pointer font-semibold transition-colors",
           value !== "fresh" && "bg-transparent",
         )}
       >
