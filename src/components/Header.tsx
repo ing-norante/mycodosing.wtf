@@ -49,7 +49,7 @@ export function Header() {
               How It Works
             </Button>
           </SheetTrigger>
-          <SheetContent>
+          <SheetContent className="w-[400px] sm:w-[540px]">
             <SheetHeader>
               <SheetTitle>How It Works</SheetTitle>
             </SheetHeader>
