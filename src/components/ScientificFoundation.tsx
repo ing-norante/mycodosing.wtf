@@ -66,7 +66,7 @@ export function CitationsList({
           key={`${citation.title}-${index}`}
           value={citation.title}
         >
-          <AccordionTrigger>
+          <AccordionTrigger className="cursor-pointer">
             {citation.authors} ({citation.year})
           </AccordionTrigger>
           <AccordionContent className="bg-background">

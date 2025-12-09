@@ -71,22 +71,23 @@ export function ToleranceSection() {
   return (
     <div className="space-y-4">
       <SectionHeader title="Tolerance" />
+      <div className="flex flex-col items-baseline gap-3 lg:flex-row">
+        <NumberInput
+          id="last-dose"
+          label="Last psilocybin-equivalent dose (mg)"
+          value={lastDosePsilocybinMg}
+          onChange={setLastDosePsilocybinMg}
+          placeholder="25"
+        />
 
-      <NumberInput
-        id="last-dose"
-        label="Last psilocybin-equivalent dose (mg)"
-        value={lastDosePsilocybinMg}
-        onChange={setLastDosePsilocybinMg}
-        placeholder="25"
-      />
-
-      <NumberInput
-        id="days-since-last-session"
-        label="Days since last session"
-        value={daysSinceLastDose}
-        onChange={setDaysSinceLastDose}
-        placeholder="14"
-      />
+        <NumberInput
+          id="days-since-last-session"
+          label="Days since last session"
+          value={daysSinceLastDose}
+          onChange={setDaysSinceLastDose}
+          placeholder="14"
+        />
+      </div>
 
       {toleranceStatus && <ToleranceStatusBadge status={toleranceStatus} />}
 

@@ -35,7 +35,10 @@ export function MaterialQualitySection() {
             setDryingQuality(value as "optimal" | "average" | "poor")
           }
         >
-          <SelectTrigger>
+          <SelectTrigger
+            aria-label="Select drying quality"
+            className="cursor-pointer"
+          >
             <SelectValue placeholder="Select drying quality" />
           </SelectTrigger>
           <SelectContent>
