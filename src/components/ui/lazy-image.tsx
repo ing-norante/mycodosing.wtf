@@ -91,7 +91,7 @@ export function LazyImage({ loader, alt, className, loadKey }: LazyImageProps) {
           src={imageUrl}
           alt={alt}
           className={cn(
-            "h-full w-full object-cover transition-opacity duration-300",
+            "animate-fade-in h-full w-full object-cover transition-opacity duration-300",
             isLoading ? "opacity-0" : "opacity-100",
           )}
           onLoad={() => setIsLoading(false)}
