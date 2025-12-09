@@ -204,7 +204,8 @@ const SPECIES_DATABASE: Record<Species | SclerotiaSpecies, SpeciesData> = {
       "Wood Lover's Paralysis (WLP) risk - temporary limb weakness",
       "Start with 30-50% of calculated dose",
     ],
-    notes: "Outdoor only. Pacific Northwest coastal dunes.",
+    notes:
+      "Be careful with this species as it can be very potent and has a high risk of WLP.",
   },
 
   psilocybe_semilanceata: {
