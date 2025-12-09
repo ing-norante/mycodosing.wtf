@@ -2,20 +2,16 @@ import { NumberInput } from "./NumberInput";
 import { SectionHeader } from "./SectionHeader";
 import { ToleranceStatusBadge } from "./ToleranceStatusBadge";
 import { estimateToleranceStatus } from "@/lib/calculator";
+import { useDosageStore } from "@/stores/useDosageStore";
 
-interface ToleranceSectionProps {
-  lastDosePsilocybinMg: number | undefined;
-  daysSinceLastDose: number | undefined;
-  onLastDoseChange: (mg: number | undefined) => void;
-  onDaysSinceChange: (days: number | undefined) => void;
-}
+export function ToleranceSection() {
+  const {
+    lastDosePsilocybinMg,
+    setLastDosePsilocybinMg,
+    daysSinceLastDose,
+    setDaysSinceLastDose,
+  } = useDosageStore();
 
-export function ToleranceSection({
-  lastDosePsilocybinMg,
-  daysSinceLastDose,
-  onLastDoseChange,
-  onDaysSinceChange,
-}: ToleranceSectionProps) {
   const toleranceStatus =
     daysSinceLastDose !== undefined
       ? estimateToleranceStatus(daysSinceLastDose)
@@ -29,7 +25,7 @@ export function ToleranceSection({
         id="last-dose"
         label="Last psilocybin-equivalent dose (mg)"
         value={lastDosePsilocybinMg}
-        onChange={onLastDoseChange}
+        onChange={setLastDosePsilocybinMg}
         placeholder="25"
       />
 
@@ -37,7 +33,7 @@ export function ToleranceSection({
         id="days-since-last-session"
         label="Days since last session"
         value={daysSinceLastDose}
-        onChange={onDaysSinceChange}
+        onChange={setDaysSinceLastDose}
         placeholder="14"
       />
 

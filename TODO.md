@@ -1,0 +1,4 @@
+- [x] Creazione Asset grafici per ogni singolo fungo
+- [x] Trasformare la libreria calculator in una serie di hooks
+- [x] Installare e gestire lo Stato con Zustand
+- [ ] React-hook form per la gestione dei form

@@ -8,20 +8,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
+import { useDosageStore } from "@/stores/useDosageStore";
 
-interface MaterialQualitySectionProps {
-  dryingQuality: "optimal" | "average" | "poor";
-  storageDegradation: number;
-  onDryingQualityChange: (quality: "optimal" | "average" | "poor") => void;
-  onStorageDegradationChange: (degradation: number) => void;
-}
+export function MaterialQualitySection() {
+  const {
+    dryingQuality,
+    setDryingQuality,
+    storageDegradation,
+    setStorageDegradation,
+  } = useDosageStore();
 
-export function MaterialQualitySection({
-  dryingQuality,
-  storageDegradation,
-  onDryingQualityChange,
-  onStorageDegradationChange,
-}: MaterialQualitySectionProps) {
   return (
     <div className="space-y-4">
       <SectionHeader title="Material Quality" />
@@ -36,7 +32,7 @@ export function MaterialQualitySection({
         <Select
           value={dryingQuality}
           onValueChange={(value) =>
-            onDryingQualityChange(value as "optimal" | "average" | "poor")
+            setDryingQuality(value as "optimal" | "average" | "poor")
           }
         >
           <SelectTrigger>
@@ -72,7 +68,7 @@ export function MaterialQualitySection({
                 Array.isArray(value) && value.length > 0
                   ? Number(value[0]) / 100
                   : 0;
-              onStorageDegradationChange(newValue);
+              setStorageDegradation(newValue);
             }}
             className="flex-1"
           />

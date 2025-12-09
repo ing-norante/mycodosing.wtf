@@ -1,44 +1,28 @@
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import { SubstanceSelector } from "./SubstanceSelector";
 import { IntensitySelector } from "./IntensitySelector";
 import { AdvancedSettings } from "./AdvancedSettings";
-import type {
-  DosageInput,
-  DosageResult,
-  IntensityLevel,
-} from "@/lib/calculator";
+import type { DosageInput, DosageResult } from "@/lib/calculator";
 import { calculateDosage } from "@/lib/calculator";
 import { Card } from "@/components/ui/card";
+import { useDosageStore } from "@/stores/useDosageStore";
 
 interface InputPanelProps {
   onResult: (result: DosageResult | null) => void;
 }
 
 export function InputPanel({ onResult }: InputPanelProps) {
-  // Core inputs
-  const [substance, setSubstance] = useState<DosageInput["substance"]>({
-    type: "mushroom",
-    species: "psilocybe_cubensis",
-    form: "dried",
-  });
-  const [intensity, setIntensity] = useState<IntensityLevel>("moderate");
-
-  // Advanced inputs
-  const [bodyWeightKg, setBodyWeightKg] = useState<number | undefined>(
-    undefined,
-  );
-  const [useWeightAdjustment, setUseWeightAdjustment] = useState(false);
-  const [onMAOI, setOnMAOI] = useState(false);
-  const [lastDosePsilocybinMg, setLastDosePsilocybinMg] = useState<
-    number | undefined
-  >(undefined);
-  const [daysSinceLastDose, setDaysSinceLastDose] = useState<
-    number | undefined
-  >(undefined);
-  const [dryingQuality, setDryingQuality] = useState<
-    "optimal" | "average" | "poor"
-  >("average");
-  const [storageDegradation, setStorageDegradation] = useState(0);
+  const {
+    substance,
+    intensity,
+    bodyWeightKg,
+    useWeightAdjustment,
+    onMAOI,
+    lastDosePsilocybinMg,
+    daysSinceLastDose,
+    dryingQuality,
+    storageDegradation,
+  } = useDosageStore();
 
   const handleCalculate = useCallback(() => {
     const input: DosageInput = {
@@ -94,7 +78,7 @@ export function InputPanel({ onResult }: InputPanelProps) {
             <h3 className="mb-4 text-xs tracking-widest uppercase">
               1. Select Substance
             </h3>
-            <SubstanceSelector value={substance} onChange={setSubstance} />
+            <SubstanceSelector />
           </section>
 
           {/* Intensity Selection */}
@@ -102,29 +86,13 @@ export function InputPanel({ onResult }: InputPanelProps) {
             <h3 className="mb-4 text-xs tracking-widest uppercase">
               2. Choose Intensity
             </h3>
-            <IntensitySelector value={intensity} onChange={setIntensity} />
+            <IntensitySelector />
           </section>
         </div>
       </Card>
 
       {/* Advanced Settings */}
-      <AdvancedSettings
-        bodyWeightKg={bodyWeightKg}
-        useWeightAdjustment={useWeightAdjustment}
-        onMAOI={onMAOI}
-        lastDosePsilocybinMg={lastDosePsilocybinMg}
-        daysSinceLastDose={daysSinceLastDose}
-        dryingQuality={dryingQuality}
-        storageDegradation={storageDegradation}
-        showMaterialQuality={substance.type !== "synthetic"}
-        onBodyWeightChange={setBodyWeightKg}
-        onUseWeightAdjustmentChange={setUseWeightAdjustment}
-        onMAOIChange={setOnMAOI}
-        onLastDoseChange={setLastDosePsilocybinMg}
-        onDaysSinceChange={setDaysSinceLastDose}
-        onDryingQualityChange={setDryingQuality}
-        onStorageDegradationChange={setStorageDegradation}
-      />
+      <AdvancedSettings showMaterialQuality={substance.type !== "synthetic"} />
 
       {/* Calculate Button */}
       <button

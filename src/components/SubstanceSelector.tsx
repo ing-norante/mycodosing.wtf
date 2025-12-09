@@ -1,5 +1,4 @@
 import type {
-  DosageInput,
   SclerotiaSpecies,
   Species,
   SubstanceCategory,
@@ -12,6 +11,7 @@ import { cn } from "@/lib/utils";
 import sclerotiaImage from "@/assets/sclerotia.png";
 import syntheticImage from "@/assets/synthetic.png";
 import mushroomImage from "@/assets/mushroom.png";
+import { useDosageStore } from "@/stores/useDosageStore";
 
 const SUBSTANCE_TYPES: {
   id: SubstanceCategory;
@@ -39,12 +39,9 @@ const SUBSTANCE_TYPES: {
   },
 ];
 
-interface SubstanceSelectorProps {
-  value: DosageInput["substance"];
-  onChange: (substance: DosageInput["substance"]) => void;
-}
+export function SubstanceSelector() {
+  const { substance, setSubstance } = useDosageStore();
 
-export function SubstanceSelector({ value, onChange }: SubstanceSelectorProps) {
   const speciesList = getSpeciesList();
   const syntheticList = getSyntheticList();
 
@@ -53,24 +50,24 @@ export function SubstanceSelector({ value, onChange }: SubstanceSelectorProps) {
     (s) => s.category === "sclerotia",
   );
 
-  const currentType = value.type;
+  const currentType = substance.type;
 
   const handleTypeChange = (type: string) => {
     const category = type as SubstanceCategory;
     if (category === "mushroom") {
-      onChange({
+      setSubstance({
         type: "mushroom",
         species: "psilocybe_cubensis" as Species,
         form: "dried",
       });
     } else if (category === "sclerotia") {
-      onChange({
+      setSubstance({
         type: "sclerotia",
         species: "psilocybe_tampanensis_sclerotia" as SclerotiaSpecies,
         form: "fresh",
       });
     } else {
-      onChange({
+      setSubstance({
         type: "synthetic",
         compound: "4_aco_dmt",
       });
@@ -98,7 +95,7 @@ export function SubstanceSelector({ value, onChange }: SubstanceSelectorProps) {
               <span className="text-sm font-bold uppercase lg:text-lg">
                 {type.label}
               </span>
-              <span className="text-xs text-wrap lg:text-xs hidden lg:block">
+              <span className="hidden text-xs text-wrap lg:block lg:text-xs">
                 {type.description}
               </span>
             </div>
@@ -107,42 +104,42 @@ export function SubstanceSelector({ value, onChange }: SubstanceSelectorProps) {
       </TabsList>
 
       <TabsContent value="mushroom">
-        {value.type === "mushroom" && (
+        {substance.type === "mushroom" && (
           <SpeciesAndFormSelector
             speciesList={mushroomSpecies}
-            selectedSpecies={value.species}
-            form={value.form}
+            selectedSpecies={substance.species}
+            form={substance.form}
             onSpeciesChange={(species) =>
-              onChange({ ...value, species: species as Species })
+              setSubstance({ ...substance, species: species as Species })
             }
-            onFormChange={(form) => onChange({ ...value, form })}
+            onFormChange={(form) => setSubstance({ ...substance, form })}
             label="Species"
           />
         )}
       </TabsContent>
 
       <TabsContent value="sclerotia">
-        {value.type === "sclerotia" && (
+        {substance.type === "sclerotia" && (
           <SpeciesAndFormSelector
             speciesList={sclerotiaSpecies}
-            selectedSpecies={value.species}
-            form={value.form}
+            selectedSpecies={substance.species}
+            form={substance.form}
             onSpeciesChange={(species) =>
-              onChange({ ...value, species: species as SclerotiaSpecies })
+              setSubstance({ ...substance, species: species as SclerotiaSpecies })
             }
-            onFormChange={(form) => onChange({ ...value, form })}
+            onFormChange={(form) => setSubstance({ ...substance, form })}
             label="Species"
           />
         )}
       </TabsContent>
 
       <TabsContent value="synthetic">
-        {value.type === "synthetic" && (
+        {substance.type === "synthetic" && (
           <SyntheticCompoundSelector
             compounds={syntheticList}
-            selectedCompound={value.compound}
+            selectedCompound={substance.compound}
             onCompoundChange={(compound) =>
-              onChange({ type: "synthetic", compound })
+              setSubstance({ type: "synthetic", compound })
             }
           />
         )}

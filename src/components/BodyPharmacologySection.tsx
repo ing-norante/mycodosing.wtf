@@ -2,24 +2,18 @@ import { NumberInput } from "./NumberInput";
 import { SectionHeader } from "./SectionHeader";
 import { CheckboxWithLabel } from "./CheckboxWithLabel";
 import { MAOIHoverCard } from "./MAOIHoverCard";
+import { useDosageStore } from "@/stores/useDosageStore";
 
-interface BodyPharmacologySectionProps {
-  bodyWeightKg: number | undefined;
-  useWeightAdjustment: boolean;
-  onMAOI: boolean;
-  onBodyWeightChange: (weight: number | undefined) => void;
-  onUseWeightAdjustmentChange: (use: boolean) => void;
-  onMAOIChange: (on: boolean) => void;
-}
+export function BodyPharmacologySection() {
+  const {
+    bodyWeightKg,
+    setBodyWeightKg,
+    useWeightAdjustment,
+    setUseWeightAdjustment,
+    onMAOI,
+    setOnMAOI,
+  } = useDosageStore();
 
-export function BodyPharmacologySection({
-  bodyWeightKg,
-  useWeightAdjustment,
-  onMAOI,
-  onBodyWeightChange,
-  onUseWeightAdjustmentChange,
-  onMAOIChange,
-}: BodyPharmacologySectionProps) {
   return (
     <div className="space-y-4">
       <SectionHeader title="Body & Pharmacology" />
@@ -28,17 +22,17 @@ export function BodyPharmacologySection({
         id="body-weight"
         label="Body weight (kg)"
         value={bodyWeightKg}
-        onChange={onBodyWeightChange}
+        onChange={setBodyWeightKg}
         placeholder="70"
       />
 
       <CheckboxWithLabel
         checked={useWeightAdjustment}
-        onCheckedChange={onUseWeightAdjustmentChange}
+        onCheckedChange={setUseWeightAdjustment}
         label="Use weight-based adjustment"
       />
 
-      <MAOIHoverCard checked={onMAOI} onCheckedChange={onMAOIChange} />
+      <MAOIHoverCard checked={onMAOI} onCheckedChange={setOnMAOI} />
     </div>
   );
 }
