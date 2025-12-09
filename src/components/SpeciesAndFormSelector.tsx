@@ -210,8 +210,10 @@ export function SpeciesAndFormSelector({
       </div>
       <div className="col-span-2 col-start-1">
         <ImageCard
+          key={`${selectedSpecies}-${form}`}
           caption={`${formatSpeciesName(selectedSpecies)} (${form})`}
           imageUrl={getSpeciesImage(selectedSpecies, form)}
+          className="animate-fade-in"
         />
       </div>
     </div>

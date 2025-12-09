@@ -88,8 +88,10 @@ export function SyntheticCompoundSelector({
         </div>
       </div>
       <ImageCard
+        key={selectedCompound}
         caption={formatCompoundName(selectedCompound)}
         imageUrl={getCompoundImage(selectedCompound)}
+        className="animate-fade-in"
       />
     </div>
   );
