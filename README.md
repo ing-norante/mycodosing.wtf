@@ -1,10 +1,10 @@
-# mycodosing – Psilocybin Dosage Calculator
+# Mycodosing.WTF – Psilocybin Dosage Calculator
 
 A research-informed psychedelic dosage calculator that provides accurate, science-based dosing recommendations for psilocybin-containing mushrooms, sclerotia (truffles), and synthetic compounds.
 
 ## Overview
 
-**mycodosing** is an educational tool designed to help users make informed decisions about psilocybin dosing. The calculator synthesizes data from peer-reviewed research to account for:
+**Mycodosing.WTF** is an educational tool designed to help users make informed decisions about psilocybin dosing. The calculator synthesizes data from peer-reviewed research to account for:
 
 - Species-specific potency variations
 - Fresh vs. dried material
@@ -39,25 +39,28 @@ The interface features a neobrutalist design with high contrast, bold typography
 
 ### Prerequisites
 
-- Node.js 18+ (or Bun)
-- pnpm (recommended) or npm
+- Node.js 18+
+- bun (recommended)
 
 ### Setup
 
 1. Clone the repository:
+
 ```bash
 git clone <repository-url>
 cd mycodosing
 ```
 
 2. Install dependencies:
+
 ```bash
-pnpm install
+bun install
 ```
 
 3. Start the development server:
+
 ```bash
-pnpm dev
+bun dev
 ```
 
 4. Open your browser to `http://localhost:5173`
@@ -65,16 +68,10 @@ pnpm dev
 ### Build for Production
 
 ```bash
-pnpm build
+bun run build
 ```
 
 The production build will be in the `dist/` directory.
-
-### Preview Production Build
-
-```bash
-pnpm preview
-```
 
 ## Usage
 
