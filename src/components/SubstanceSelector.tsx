@@ -12,6 +12,7 @@ import sclerotiaImage from "@/assets/sclerotia.png";
 import syntheticImage from "@/assets/synthetic.png";
 import mushroomImage from "@/assets/mushroom.png";
 import { useDosageStore } from "@/stores/useDosageStore";
+import { LazyImage } from "@/components/ui/lazy-image";
 
 const SUBSTANCE_TYPES: {
   id: SubstanceCategory;
@@ -90,10 +91,11 @@ export function SubstanceSelector() {
           >
             <div className="flex flex-col items-center justify-center gap-1">
               {type.image !== undefined && (
-                <img
-                  src={type.image}
+                <LazyImage
+                  loader={() => Promise.resolve(type.image)}
                   alt={`${type.label} image`}
                   className="size-14"
+                  loadKey={type.id}
                 />
               )}
               <span className="text-sm font-bold uppercase lg:text-lg">

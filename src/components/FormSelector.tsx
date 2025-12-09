@@ -3,6 +3,7 @@ import type { MaterialForm } from "@/lib/calculator";
 import { cn } from "@/lib/utils";
 import freshImage from "@/assets/fresh.png";
 import driedImage from "@/assets/dried.png";
+import { LazyImage } from "@/components/ui/lazy-image";
 
 interface FormSelectorProps {
   value: MaterialForm;
@@ -19,7 +20,12 @@ export function FormSelector({ value, onChange }: FormSelectorProps) {
           value !== "dried" && "bg-transparent",
         )}
       >
-        <img src={driedImage} alt="Dried form" className="size-5" />
+        <LazyImage
+          loader={() => Promise.resolve(driedImage)}
+          alt="Dried form"
+          className="size-5"
+          loadKey="dried"
+        />
         DRIED
       </Button>
       <Button
@@ -29,7 +35,12 @@ export function FormSelector({ value, onChange }: FormSelectorProps) {
           value !== "fresh" && "bg-transparent",
         )}
       >
-        <img src={freshImage} alt="Fresh form" className="size-5" />
+        <LazyImage
+          loader={() => Promise.resolve(freshImage)}
+          alt="Fresh form"
+          className="size-5"
+          loadKey="fresh"
+        />
         FRESH
       </Button>
     </div>
