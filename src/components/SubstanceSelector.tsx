@@ -90,7 +90,11 @@ export function SubstanceSelector() {
           >
             <div className="flex flex-col items-center justify-center gap-1">
               {type.image !== undefined && (
-                <img src={type.image} alt={type.label} className="size-14" />
+                <img
+                  src={type.image}
+                  alt={`${type.label} image`}
+                  className="size-14"
+                />
               )}
               <span className="text-sm font-bold uppercase lg:text-lg">
                 {type.label}
@@ -125,7 +129,10 @@ export function SubstanceSelector() {
             selectedSpecies={substance.species}
             form={substance.form}
             onSpeciesChange={(species) =>
-              setSubstance({ ...substance, species: species as SclerotiaSpecies })
+              setSubstance({
+                ...substance,
+                species: species as SclerotiaSpecies,
+              })
             }
             onFormChange={(form) => setSubstance({ ...substance, form })}
             label="Species"

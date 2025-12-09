@@ -19,7 +19,7 @@ export function FormSelector({ value, onChange }: FormSelectorProps) {
           value !== "dried" && "bg-transparent",
         )}
       >
-        <img src={driedImage} alt="Dried" className="size-5" />
+        <img src={driedImage} alt="Dried form" className="size-5" />
         DRIED
       </Button>
       <Button
@@ -29,7 +29,7 @@ export function FormSelector({ value, onChange }: FormSelectorProps) {
           value !== "fresh" && "bg-transparent",
         )}
       >
-        <img src={freshImage} alt="Fresh" className="size-5" />
+        <img src={freshImage} alt="Fresh form" className="size-5" />
         FRESH
       </Button>
     </div>

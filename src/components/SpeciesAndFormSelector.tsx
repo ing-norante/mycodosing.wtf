@@ -177,7 +177,10 @@ export function SpeciesAndFormSelector({
             onSpeciesChange(value as Species | SclerotiaSpecies)
           }
         >
-          <SelectTrigger className="shadow-shadow p-1">
+          <SelectTrigger
+            className="shadow-shadow p-1"
+            aria-label="Select species"
+          >
             <SelectValue
               placeholder={
                 <>

@@ -42,7 +42,10 @@ export function Footer() {
           value={colorTheme}
           onValueChange={(v) => setColorTheme(v as ColorTheme)}
         >
-          <SelectTrigger className="w-full sm:w-[130px]">
+          <SelectTrigger
+            className="w-full sm:w-[130px]"
+            aria-label="Select color theme"
+          >
             {/* <Palette className="mr-2 size-4" /> */}
             <SelectValue placeholder="Theme" />
           </SelectTrigger>
@@ -69,7 +72,10 @@ export function Footer() {
 
         {/* Mode Selector */}
         <Select value={mode} onValueChange={(v) => setMode(v as Mode)}>
-          <SelectTrigger className="w-full sm:w-[130px]">
+          <SelectTrigger
+            className="w-full sm:w-[130px]"
+            aria-label="Select mode"
+          >
             <SelectValue placeholder="Mode" />
           </SelectTrigger>
           <SelectContent>

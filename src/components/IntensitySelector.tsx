@@ -43,6 +43,7 @@ export function IntensitySelector() {
       {/* Slider */}
       <div className="space-y-2">
         <Slider
+          aria-label="Intensity level slider"
           max={levels.length - 1}
           step={1}
           value={[currentIndex]}
@@ -61,6 +62,7 @@ export function IntensitySelector() {
                   ? "text-main"
                   : "text-muted-foreground hover:text-foreground",
               )}
+              aria-label={`Intensity level ${level.level.slice(0, 3)}`}
             >
               {level.level.slice(0, 3)}
             </button>
