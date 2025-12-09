@@ -4,13 +4,77 @@ import { X } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableRow } from "@/components/ui/table";
 import { CitationsList } from "@/components/ScientificFoundation";
+import {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from "@/components/ui/chart";
+import {
+  Bar,
+  BarChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Line,
+  LineChart,
+  Cell,
+  Pie,
+  PieChart,
+  Area,
+  AreaChart,
+} from "recharts";
+import { getSpeciesComposition } from "@/lib/calculator";
+import type { DosageInput } from "@/lib/calculator";
 
 // ============================================================================
 // Dose Summary Component
 // ============================================================================
 
-function DoseSummary({ result }: { result: DosageResult }) {
+function DoseSummary({
+  result,
+  input,
+}: {
+  result: DosageResult;
+  input?: DosageInput;
+}) {
   const { amount, unit, psilocybinEquivalentMg } = result;
+
+  // Prepare data for bar chart
+  const chartData = [
+    {
+      label: "Min",
+      value: amount.min,
+      psilocybin: psilocybinEquivalentMg.min,
+      isMedian: false,
+    },
+    {
+      label: "Median",
+      value: amount.median,
+      psilocybin: psilocybinEquivalentMg.median,
+      isMedian: true,
+    },
+    {
+      label: "Max",
+      value: amount.max,
+      psilocybin: psilocybinEquivalentMg.max,
+      isMedian: false,
+    },
+  ];
+
+  const chartConfig = {
+    value: {
+      label: `Dose (${unit})`,
+      color: "var(--chart-1)",
+    },
+    median: {
+      label: `Dose (${unit}) - Median`,
+      color: "var(--chart-2)",
+    },
+    psilocybin: {
+      label: "Psilocybin (mg)",
+      color: "var(--chart-3)",
+    },
+  };
 
   return (
     <Card className="p-4">
@@ -18,10 +82,45 @@ function DoseSummary({ result }: { result: DosageResult }) {
         Recommended Dose
       </h3>
 
-      <div className="mb-2 text-sm">
+      <div className="mb-4 text-sm">
         Dose range ({unit === "g" ? "grams of material" : "mg of compound"})
       </div>
 
+      {/* Bar Chart */}
+      <div className="mb-6">
+        <ChartContainer config={chartConfig} className="h-[200px] w-full">
+          <BarChart data={chartData}>
+            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            <XAxis
+              dataKey="label"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tick={{ fill: "hsl(var(--foreground))" }}
+            />
+            <YAxis
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tick={{ fill: "hsl(var(--foreground))" }}
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent indicator="line" />}
+            />
+            <Bar dataKey="value" radius={[0, 0, 0, 0]} strokeWidth={3}>
+              {chartData.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={entry.isMedian ? "var(--chart-1)" : "var(--background)"}
+                />
+              ))}
+            </Bar>
+          </BarChart>
+        </ChartContainer>
+      </div>
+
+      {/* Numerical values for reference */}
       <div className="mb-6 grid grid-cols-3 gap-4">
         <div className="text-center">
           <div className="mb-1 text-xs uppercase">Min</div>
@@ -57,6 +156,161 @@ function DoseSummary({ result }: { result: DosageResult }) {
           <span>{psilocybinEquivalentMg.max}</span>
           <span className="text-xs">mg</span>
         </div>
+      </div>
+
+      {/* Potency Composition Donut Chart */}
+      {input &&
+        input.substance.type !== "synthetic" &&
+        (() => {
+          const composition = getSpeciesComposition(input.substance.species);
+          if (!composition) return null;
+
+          const total =
+            composition.psilocybin +
+            composition.psilocin +
+            composition.baeocystin;
+          if (total === 0) return null;
+
+          const pieData = [
+            {
+              name: "Psilocybin",
+              value: composition.psilocybin,
+              percentage: ((composition.psilocybin / total) * 100).toFixed(1),
+            },
+            {
+              name: "Psilocin",
+              value: composition.psilocin,
+              percentage: ((composition.psilocin / total) * 100).toFixed(1),
+            },
+            {
+              name: "Baeocystin",
+              value: composition.baeocystin,
+              percentage: ((composition.baeocystin / total) * 100).toFixed(1),
+            },
+          ].filter((item) => item.value > 0);
+
+          const pieConfig = {
+            psilocybin: {
+              label: "Psilocybin",
+              color: "var(--chart-1)",
+            },
+            psilocin: {
+              label: "Psilocin",
+              color: "var(--chart-2)",
+            },
+            baeocystin: {
+              label: "Baeocystin",
+              color: "var(--chart-3)",
+            },
+          };
+
+          return (
+            <div className="border-border mt-4 border-t-3 pt-4">
+              <h4 className="mb-3 text-xs tracking-widest uppercase">
+                Chemical Composition
+              </h4>
+              <ChartContainer config={pieConfig} className="h-[200px] w-full">
+                <PieChart>
+                  <Pie
+                    data={pieData}
+                    dataKey="value"
+                    nameKey="name"
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={60}
+                    outerRadius={80}
+                    strokeWidth={3}
+                    stroke="hsl(var(--border))"
+                  >
+                    {pieData.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={`var(--color-${entry.name.toLowerCase()})`}
+                      />
+                    ))}
+                  </Pie>
+                  <ChartTooltip
+                    content={({ active, payload }) => {
+                      if (!active || !payload?.length) return null;
+                      const data = payload[0].payload;
+                      return (
+                        <div className="border-border bg-background rounded-lg border px-2.5 py-1.5 text-xs shadow-xl">
+                          <div className="font-bold">{data.name}</div>
+                          <div className="text-muted-foreground">
+                            {data.value.toFixed(2)} mg/g
+                          </div>
+                          <div className="text-muted-foreground">
+                            {data.percentage}%
+                          </div>
+                        </div>
+                      );
+                    }}
+                  />
+                </PieChart>
+              </ChartContainer>
+              <div className="mt-2 text-center text-xs">
+                <span className="font-mono">
+                  {composition.name} (dried material)
+                </span>
+              </div>
+            </div>
+          );
+        })()}
+
+      {/* Uncertainty Range Area Chart */}
+      <div className="border-border mt-4 border-t-3 pt-4">
+        <h4 className="mb-3 text-xs tracking-widest uppercase">
+          Uncertainty Range
+        </h4>
+        <ChartContainer config={chartConfig} className="h-[150px] w-full">
+          <AreaChart
+            data={[
+              { label: "Min", value: amount.min },
+              { label: "Median", value: amount.median },
+              { label: "Max", value: amount.max },
+            ]}
+          >
+            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            <XAxis
+              dataKey="label"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tick={{ fill: "hsl(var(--foreground))" }}
+            />
+            <YAxis
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tick={{ fill: "hsl(var(--foreground))" }}
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent indicator="line" />}
+            />
+            <defs>
+              <linearGradient id="fillUncertainty" x1="0" y1="0" x2="0" y2="1">
+                <stop
+                  offset="5%"
+                  stopColor="var(--color-value)"
+                  stopOpacity={0.3}
+                />
+                <stop
+                  offset="95%"
+                  stopColor="var(--color-value)"
+                  stopOpacity={0}
+                />
+              </linearGradient>
+            </defs>
+            <Area
+              type="monotone"
+              dataKey="value"
+              stroke="var(--color-value)"
+              strokeWidth={3}
+              fill="url(#fillUncertainty)"
+            />
+          </AreaChart>
+        </ChartContainer>
       </div>
     </Card>
   );
@@ -104,9 +358,58 @@ function BreakdownTable({ result }: { result: DosageResult }) {
 
   const confidenceStyle = CONFIDENCE_STYLES[confidence];
 
+  // Prepare data for line chart
+  const chartData = [
+    { step: "Base", value: baseTargetMg },
+    { step: "Weight", value: afterWeightAdjustment },
+    { step: "Tolerance", value: afterTolerance },
+    { step: "MAOI", value: afterMAOI },
+  ];
+
+  const chartConfig = {
+    value: {
+      label: "Dose (mg)",
+      color: "var(--chart-1)",
+    },
+  };
+
   return (
     <Card className="p-4">
-      <h3 className="text-xs tracking-widest uppercase">Model Insight</h3>
+      <h3 className="mb-4 text-xs tracking-widest uppercase">Model Insight</h3>
+
+      {/* Calculation Breakdown Line Chart */}
+      <div className="mb-6">
+        <ChartContainer config={chartConfig} className="h-[200px] w-full">
+          <LineChart data={chartData}>
+            <CartesianGrid strokeDasharray="3 3" vertical={false} />
+            <XAxis
+              dataKey="step"
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tick={{ fill: "hsl(var(--foreground))" }}
+            />
+            <YAxis
+              tickLine={false}
+              axisLine={false}
+              tickMargin={8}
+              tick={{ fill: "hsl(var(--foreground))" }}
+            />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent indicator="line" />}
+            />
+            <Line
+              type="monotone"
+              dataKey="value"
+              stroke="var(--chart-1)"
+              strokeWidth={3}
+              dot={{ fill: "var(--chart-1)", r: 4, strokeWidth: 2 }}
+              activeDot={{ r: 6 }}
+            />
+          </LineChart>
+        </ChartContainer>
+      </div>
 
       <Table className="w-full text-sm">
         <TableBody className="divide-border divide-y">
@@ -254,9 +557,10 @@ function ResultCitationsList({ result }: { result: DosageResult }) {
 
 interface ResultPanelProps {
   result: DosageResult | null;
+  input?: DosageInput;
 }
 
-export function ResultPanel({ result }: ResultPanelProps) {
+export function ResultPanel({ result, input }: ResultPanelProps) {
   if (!result) {
     return (
       <div className="space-y-4">
@@ -284,7 +588,7 @@ export function ResultPanel({ result }: ResultPanelProps) {
 
   return (
     <div className="space-y-4">
-      <DoseSummary result={result} />
+      <DoseSummary result={result} input={input} />
       <BreakdownTable result={result} />
       <WarningsList result={result} />
       <ResultCitationsList result={result} />

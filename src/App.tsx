@@ -7,8 +7,19 @@ import { ThemeProvider } from "./components/ThemeProvider";
 import type { DosageResult } from "./lib/calculator";
 import "./index.css";
 
+import type { DosageInput } from "./lib/calculator";
+
 function App() {
   const [result, setResult] = useState<DosageResult | null>(null);
+  const [input, setInput] = useState<DosageInput | undefined>(undefined);
+
+  const handleResult = (
+    newResult: DosageResult | null,
+    newInput?: DosageInput,
+  ) => {
+    setResult(newResult);
+    setInput(newInput);
+  };
 
   return (
     <ThemeProvider>
@@ -18,11 +29,11 @@ function App() {
           <main className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
             {/* Input Panel */}
 
-            <InputPanel onResult={setResult} />
+            <InputPanel onResult={handleResult} />
 
             {/* Result Panel */}
             <div className="lg:sticky lg:top-8 lg:self-start">
-              <ResultPanel result={result} />
+              <ResultPanel result={result} input={input} />
             </div>
           </main>
 

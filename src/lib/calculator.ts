@@ -471,7 +471,7 @@ function calculatePotencyMgPerG(species: SpeciesData): number {
  */
 function calculateWeightFactor(
   bodyWeightKg: number | undefined,
-  useWeightAdjustment: boolean | undefined
+  useWeightAdjustment: boolean | undefined,
 ): number {
   if (!useWeightAdjustment || !bodyWeightKg) return 1.0;
 
@@ -521,7 +521,7 @@ function calculateToleranceMultiplier(tolerance?: ToleranceInput): number {
  * Poor drying (high heat, slow) destroys more psilocin
  */
 function getDryingDegradationFactor(
-  quality: "optimal" | "average" | "poor" | undefined
+  quality: "optimal" | "average" | "poor" | undefined,
 ): number {
   switch (quality) {
     case "optimal":
@@ -550,7 +550,7 @@ export function calculateDosage(input: DosageInput): DosageResult {
   // 2. Weight adjustment
   const weightFactor = calculateWeightFactor(
     input.bodyWeightKg,
-    input.useWeightAdjustment
+    input.useWeightAdjustment,
   );
   const afterWeightMg = baseTargetMg * weightFactor;
 
@@ -566,7 +566,7 @@ export function calculateDosage(input: DosageInput): DosageResult {
     notes.push(
       `Weight-adjusted: ${input.bodyWeightKg}kg → ${(
         weightFactor * 100
-      ).toFixed(0)}% of standard dose`
+      ).toFixed(0)}% of standard dose`,
     );
   }
 
@@ -579,7 +579,7 @@ export function calculateDosage(input: DosageInput): DosageResult {
     warnings.push({
       severity: "caution",
       message: `Tolerance detected: ${(toleranceMultiplier * 100 - 100).toFixed(
-        0
+        0,
       )}% dose increase applied. Full reset in ~${daysToReset} days.`,
     });
     citations.push({
@@ -657,8 +657,8 @@ export function calculateDosage(input: DosageInput): DosageResult {
     if (input.storageDegradation && input.storageDegradation > 0) {
       notes.push(
         `Storage degradation: ${(input.storageDegradation * 100).toFixed(
-          0
-        )}% potency loss assumed`
+          0,
+        )}% potency loss assumed`,
       );
     }
 
@@ -669,7 +669,7 @@ export function calculateDosage(input: DosageInput): DosageResult {
 
     if (input.substance.form === "fresh") {
       notes.push(
-        `Fresh material: ${species.freshToDryRatio}x weight compared to dried`
+        `Fresh material: ${species.freshToDryRatio}x weight compared to dried`,
       );
     }
 
@@ -707,8 +707,8 @@ export function calculateDosage(input: DosageInput): DosageResult {
         w.includes("EXTREME") || w.includes("deadly")
           ? "danger"
           : w.includes("risk") || w.includes("WLP")
-          ? "warning"
-          : "caution";
+            ? "warning"
+            : "caution";
       warnings.push({ severity, message: w });
     });
     notes.push(species.notes);
@@ -725,7 +725,7 @@ export function calculateDosage(input: DosageInput): DosageResult {
 
   // 7. General safety note
   notes.push(
-    "Set and setting significantly influence outcomes. Prepare a safe, comfortable environment."
+    "Set and setting significantly influence outcomes. Prepare a safe, comfortable environment.",
   );
 
   // Calculate psilocybin equivalent ranges
@@ -831,4 +831,25 @@ export function estimateToleranceStatus(daysSinceLastDose: number): {
   }
 
   return { tolerancePercent, daysToFullReset, recommendation };
+}
+
+/**
+ * Get species composition data for visualization
+ * Returns psilocybin, psilocin, and baeocystin content
+ */
+export function getSpeciesComposition(speciesId: Species | SclerotiaSpecies): {
+  psilocybin: number;
+  psilocin: number;
+  baeocystin: number;
+  name: string;
+} | null {
+  const species = SPECIES_DATABASE[speciesId];
+  if (!species) return null;
+
+  return {
+    psilocybin: species.psilocybinMgPerG,
+    psilocin: species.psilocinMgPerG,
+    baeocystin: species.baeocystinMgPerG,
+    name: species.name,
+  };
 }

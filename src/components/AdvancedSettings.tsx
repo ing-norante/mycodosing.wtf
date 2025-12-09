@@ -23,11 +23,11 @@ export function AdvancedSettings({
         </AccordionTrigger>
         <AccordionContent className="bg-background">
           <div className="mt-6 space-y-6">
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <BodyPharmacologySection />
-              <ToleranceSection />
               {showMaterialQuality && <MaterialQualitySection />}
             </div>
+            <ToleranceSection />
           </div>
         </AccordionContent>
       </AccordionItem>

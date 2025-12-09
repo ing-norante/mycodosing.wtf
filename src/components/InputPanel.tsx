@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card";
 import { useDosageStore } from "@/stores/useDosageStore";
 
 interface InputPanelProps {
-  onResult: (result: DosageResult | null) => void;
+  onResult: (result: DosageResult | null, input?: DosageInput) => void;
 }
 
 export function InputPanel({ onResult }: InputPanelProps) {
@@ -46,7 +46,7 @@ export function InputPanel({ onResult }: InputPanelProps) {
 
     try {
       const result = calculateDosage(input);
-      onResult(result);
+      onResult(result, input);
     } catch {
       // Handle any calculation errors
       onResult(null);

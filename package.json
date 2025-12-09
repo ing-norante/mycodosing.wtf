@@ -32,6 +32,7 @@
     "lucide-react": "^0.556.0",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
+    "recharts": "^3.5.1",
     "rolldown-vite": "^7.2.10",
     "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.1.17",
