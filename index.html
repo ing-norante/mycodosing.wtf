@@ -64,27 +64,10 @@
     <!-- Inline script to prevent FOUC (Flash of Unstyled Content) -->
     <script>
       (function () {
-        // Get stored preferences or defaults
-        var colorTheme =
-          localStorage.getItem("mycodosing-color-theme") || "teal";
-        var mode = localStorage.getItem("mycodosing-mode") || "system";
-
-        // Set color theme
-        document.documentElement.setAttribute("data-color-theme", colorTheme);
-
-        // Resolve mode (check system preference if mode is 'system')
-        var resolvedMode = mode;
-        if (mode === "system") {
-          resolvedMode = window.matchMedia("(prefers-color-scheme: dark)")
-            .matches
-            ? "dark"
-            : "light";
-        }
-
-        // Apply dark mode class
-        if (resolvedMode === "dark") {
-          document.documentElement.classList.add("dark");
-        }
+        // Set teal color theme and light mode
+        document.documentElement.setAttribute("data-color-theme", "teal");
+        // Ensure dark mode class is not present
+        document.documentElement.classList.remove("dark");
       })();
     </script>
 
