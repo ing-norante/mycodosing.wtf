@@ -42,7 +42,7 @@ export function Footer() {
           }}
         >
           <SelectTrigger
-            className="w-full sm:w-[130px]"
+            className="w-full cursor-pointer sm:w-[130px]"
             aria-label="Select color theme"
           >
             {/* <Palette className="mr-2 size-4" /> */}
@@ -80,7 +80,7 @@ export function Footer() {
           }}
         >
           <SelectTrigger
-            className="w-full sm:w-[130px]"
+            className="w-full cursor-pointer sm:w-[130px]"
             aria-label="Select mode"
           >
             <SelectValue placeholder="Mode" />

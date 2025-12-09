@@ -22,7 +22,7 @@ export function AdvancedSettings({
     <Accordion type="single" collapsible className="w-full">
       <AccordionItem value="item-1">
         <AccordionTrigger
-          className="bg-background"
+          className="bg-background cursor-pointer"
           onClick={() =>
             posthog.capture("advanced_settings_accordion_opened", {
               value: "advanced_settings",

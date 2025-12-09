@@ -45,6 +45,7 @@ export function IntensitySelector() {
       {/* Slider */}
       <div className="space-y-2">
         <Slider
+          className="cursor-pointer"
           aria-label="Intensity level slider"
           max={levels.length - 1}
           step={1}

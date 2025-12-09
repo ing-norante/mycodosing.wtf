@@ -65,7 +65,7 @@ export function SpeciesAndFormSelector({
           }}
         >
           <SelectTrigger
-            className="shadow-shadow p-1"
+            className="shadow-shadow p-1 cursor-pointer"
             aria-label="Select species"
           >
             <SelectValue

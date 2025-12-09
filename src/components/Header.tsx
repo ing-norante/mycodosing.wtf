@@ -38,7 +38,7 @@ export function Header() {
           </div>
         </div>
         <Sheet>
-          <SheetTrigger asChild>
+          <SheetTrigger asChild className="cursor-pointer">
             <Button
               onClick={() =>
                 posthog.capture("how_it_works_button_clicked", {

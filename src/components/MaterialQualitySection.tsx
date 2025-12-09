@@ -58,6 +58,7 @@ export function MaterialQualitySection() {
         </Label>
         <div className="flex items-center gap-3">
           <Slider
+            aria-label="Estimated storage potency loss (%) slider"
             key={`storage-${dryingQuality}`}
             min={0}
             max={50}
@@ -70,7 +71,7 @@ export function MaterialQualitySection() {
                   : 0;
               setStorageDegradation(newValue);
             }}
-            className="flex-1"
+            className="flex-1 cursor-pointer"
           />
           <span className="w-12 text-right font-mono font-bold">
             {Math.round(storageDegradation * 100)}%

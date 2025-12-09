@@ -22,6 +22,7 @@ export function MAOIHoverCard({
     <div className="flex items-center gap-3">
       <Checkbox
         checked={checked}
+        className="cursor-pointer"
         onCheckedChange={(checked) => {
           onCheckedChange(checked as boolean);
           posthog.capture("on_maoi_changed", {

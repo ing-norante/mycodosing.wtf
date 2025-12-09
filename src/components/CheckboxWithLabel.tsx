@@ -18,6 +18,7 @@ export function CheckboxWithLabel({
     <Label className="flex cursor-pointer items-center gap-3 font-semibold">
       <Checkbox
         checked={checked}
+        className="cursor-pointer"
         onCheckedChange={(checked) => {
           onCheckedChange(checked as boolean);
           posthog.capture("use_weight_adjustment_changed", {
