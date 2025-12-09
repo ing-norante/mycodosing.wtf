@@ -4,36 +4,46 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MycoMetric — Psilocybin Dosage Calculator</title>
-    <meta name="description" content="Research-informed psychedelic dosage calculator for psilocybin mushrooms, sclerotia, and synthetic tryptamines." />
+    <title>MycoDosing.WTF — Psilocybin Dosage Calculator</title>
+    <meta
+      name="description"
+      content="Research-informed psychedelic dosage calculator for psilocybin mushrooms, sclerotia, and synthetic tryptamines."
+    />
 
     <!-- Inline script to prevent FOUC (Flash of Unstyled Content) -->
     <script>
-      (function() {
+      (function () {
         // Get stored preferences or defaults
-        var colorTheme = localStorage.getItem('mycometric-color-theme') || 'teal';
-        var mode = localStorage.getItem('mycometric-mode') || 'system';
+        var colorTheme =
+          localStorage.getItem("mycodosing-color-theme") || "teal";
+        var mode = localStorage.getItem("mycodosing-mode") || "system";
 
         // Set color theme
-        document.documentElement.setAttribute('data-color-theme', colorTheme);
+        document.documentElement.setAttribute("data-color-theme", colorTheme);
 
         // Resolve mode (check system preference if mode is 'system')
         var resolvedMode = mode;
-        if (mode === 'system') {
-          resolvedMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        if (mode === "system") {
+          resolvedMode = window.matchMedia("(prefers-color-scheme: dark)")
+            .matches
+            ? "dark"
+            : "light";
         }
 
         // Apply dark mode class
-        if (resolvedMode === 'dark') {
-          document.documentElement.classList.add('dark');
+        if (resolvedMode === "dark") {
+          document.documentElement.classList.add("dark");
         }
       })();
     </script>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="root"></div>

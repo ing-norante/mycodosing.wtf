@@ -4,8 +4,9 @@ export function Header() {
       <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         {/* Left side - Title */}
         <div className="flex-1">
-          <h1 className="mb-2 text-5xl leading-none font-black tracking-tight sm:text-6xl lg:text-7xl">
-            <span className="text-main">MYCO</span>METRIC
+          <h1 className="mb-2 text-4xl leading-none font-black tracking-tight sm:text-6xl lg:text-7xl">
+            <span className="text-main">MYCO</span>DOSING.
+            <span className="text-main">WTF</span>
           </h1>
           <p className="text-lg font-medium tracking-wide sm:text-xl">
             Research-informed psychedelic dosage calculator

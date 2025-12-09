@@ -70,7 +70,7 @@ export const useDosageStore = create<DosageStore>()(
       reset: () => set(initialState),
     }),
     {
-      name: "mycometric-settings",
+      name: "mycodosing-settings",
       partialize: (state) => ({
         // Only persist safe, stable preferences
         substance: state.substance,

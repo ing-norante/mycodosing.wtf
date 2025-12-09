@@ -1,8 +1,8 @@
 import { useCallback, useSyncExternalStore, type ReactNode } from "react";
 import { ThemeContext, type ColorTheme, type Mode } from "@/hooks/useTheme";
 
-const STORAGE_KEY_COLOR = "mycometric-color-theme";
-const STORAGE_KEY_MODE = "mycometric-mode";
+const STORAGE_KEY_COLOR = "mycodosing-color-theme";
+const STORAGE_KEY_MODE = "mycodosing-mode";
 
 function getStoredColorTheme(): ColorTheme {
   if (typeof window === "undefined") return "teal";

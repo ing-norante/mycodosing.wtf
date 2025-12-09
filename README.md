@@ -1,4 +1,4 @@
-MycoMetric – Psilocybin Dosage Calculator
+mycodosing – Psilocybin Dosage Calculator
 
 Stack assumptions:
 
@@ -130,7 +130,7 @@ Overall layout:
 Top area:
 
 - Left:
-  - Giant title: MycoMetric”
+  - Giant title: mycodosing”
   - Subtitle in smaller type: “Research-informed psychedelic dosage calculator v3.0”
   - Short disclaimer line: “Educational tool, not medical advice.”
 - Right:
