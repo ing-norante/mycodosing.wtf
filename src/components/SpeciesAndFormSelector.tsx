@@ -11,6 +11,7 @@ import { FormSelector } from "./FormSelector";
 import type { MaterialForm, Species, SclerotiaSpecies } from "@/lib/calculator";
 import { LazyImageCard } from "@/components/ui/lazy-image-card";
 import { getSpeciesImageLoader } from "@/lib/species-images";
+import { usePostHog } from "posthog-js/react";
 
 function formatSpeciesName(species: string): string {
   return species
@@ -43,6 +44,7 @@ export function SpeciesAndFormSelector({
   onFormChange,
   label,
 }: SpeciesAndFormSelectorProps) {
+  const posthog = usePostHog();
   // Create a loader function for the current species and form
   const imageLoader = getSpeciesImageLoader(selectedSpecies, form);
 
@@ -57,9 +59,10 @@ export function SpeciesAndFormSelector({
         </Label>
         <Select
           value={selectedSpecies}
-          onValueChange={(value) =>
-            onSpeciesChange(value as Species | SclerotiaSpecies)
-          }
+          onValueChange={(value) => {
+            onSpeciesChange(value as Species | SclerotiaSpecies);
+            posthog.capture("species_changed", { species: value });
+          }}
         >
           <SelectTrigger
             className="shadow-shadow p-1"

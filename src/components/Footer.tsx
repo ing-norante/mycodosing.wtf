@@ -1,4 +1,4 @@
-import { TriangleAlert, Sun, Moon, Monitor } from "lucide-react";
+import { Sun, Moon, Monitor } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -8,6 +8,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { usePostHog } from "posthog-js/react";
 import { useTheme, type ColorTheme, type Mode } from "@/hooks/useTheme";
 
 const COLOR_THEMES: { value: ColorTheme; label: string; color: string }[] = [
@@ -25,22 +26,20 @@ const MODES: { value: Mode; label: string; icon: typeof Sun }[] = [
 
 export function Footer() {
   const { colorTheme, mode, setColorTheme, setMode } = useTheme();
-
+  const posthog = usePostHog();
   return (
     <footer className="border-foreground mt-8 flex w-full flex-col items-start justify-between gap-4 border-t-3 pt-6 sm:flex-row sm:items-center">
-      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-        <p className="text-base font-medium tracking-wide">
-          <TriangleAlert className="inline-block size-4" /> This tool is for{" "}
-          <span className="text-main font-bold">educational purposes</span>{" "}
-          only. It is not medical advice. Psychoactive substance use carries
-          inherent risks and may be illegal in your jurisdiction.
-        </p>
-      </div>
+      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center"></div>
       <div className="flex w-full items-center justify-between gap-2 sm:w-auto sm:justify-end">
         {/* Color Theme Selector */}
         <Select
           value={colorTheme}
-          onValueChange={(v) => setColorTheme(v as ColorTheme)}
+          onValueChange={(v) => {
+            setColorTheme(v as ColorTheme);
+            posthog.capture("color_theme_selected", {
+              colorTheme: v,
+            });
+          }}
         >
           <SelectTrigger
             className="w-full sm:w-[130px]"
@@ -71,7 +70,15 @@ export function Footer() {
         </Select>
 
         {/* Mode Selector */}
-        <Select value={mode} onValueChange={(v) => setMode(v as Mode)}>
+        <Select
+          value={mode}
+          onValueChange={(v) => {
+            setMode(v as Mode);
+            posthog.capture("mode_selected", {
+              mode: v,
+            });
+          }}
+        >
           <SelectTrigger
             className="w-full sm:w-[130px]"
             aria-label="Select mode"

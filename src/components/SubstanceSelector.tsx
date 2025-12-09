@@ -13,6 +13,7 @@ import syntheticImage from "@/assets/synthetic.png";
 import mushroomImage from "@/assets/mushroom.png";
 import { useDosageStore } from "@/stores/useDosageStore";
 import { LazyImage } from "@/components/ui/lazy-image";
+import { usePostHog } from "posthog-js/react";
 
 const SUBSTANCE_TYPES: {
   id: SubstanceCategory;
@@ -41,6 +42,7 @@ const SUBSTANCE_TYPES: {
 ];
 
 export function SubstanceSelector() {
+  const posthog = usePostHog();
   const { substance, setSubstance } = useDosageStore();
 
   const speciesList = getSpeciesList();
@@ -61,17 +63,20 @@ export function SubstanceSelector() {
         species: "psilocybe_cubensis" as Species,
         form: "dried",
       });
+      posthog.capture("substance_changed", { substance: "mushroom" });
     } else if (category === "sclerotia") {
       setSubstance({
         type: "sclerotia",
         species: "psilocybe_tampanensis_sclerotia" as SclerotiaSpecies,
         form: "fresh",
       });
+      posthog.capture("substance_changed", { substance: "sclerotia" });
     } else {
       setSubstance({
         type: "synthetic",
         compound: "4_aco_dmt",
       });
+      posthog.capture("substance_changed", { substance: "synthetic" });
     }
   };
 

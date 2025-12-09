@@ -11,8 +11,11 @@ import {
 
 import { HowItWorks } from "@/components/HowItWorks";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { usePostHog } from "posthog-js/react";
+import { TriangleAlert } from "lucide-react";
 
 export function Header() {
+  const posthog = usePostHog();
   return (
     <header className="border-foreground mb-8 w-full border-b-3 pb-6">
       <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
@@ -25,13 +28,26 @@ export function Header() {
           <p className="text-lg font-medium tracking-wide sm:text-xl">
             Research-informed psychedelic dosage calculator
           </p>
-          <p className="border-main mt-2 border-l-4 pl-3 text-sm">
-            Educational tool — not medical advice
-          </p>
+          <div className="border-main mt-2 border-l-4 pl-3 text-sm">
+            <p className="text-base font-medium tracking-wide">
+              <TriangleAlert className="inline-block size-4" /> This tool is for{" "}
+              <span className="text-main font-bold">educational purposes</span>{" "}
+              only. It is not medical advice. Psychoactive substance use carries
+              inherent risks and may be illegal in your jurisdiction.
+            </p>
+          </div>
         </div>
         <Sheet>
           <SheetTrigger asChild>
-            <Button>How It Works</Button>
+            <Button
+              onClick={() =>
+                posthog.capture("how_it_works_button_clicked", {
+                  how_it_works_button_clicked: "how_it_works_button_clicked",
+                })
+              }
+            >
+              How It Works
+            </Button>
           </SheetTrigger>
           <SheetContent>
             <SheetHeader>

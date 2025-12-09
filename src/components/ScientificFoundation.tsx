@@ -33,7 +33,7 @@ interface CitationWithLink {
   authors: string;
   year: number;
   title: string;
-  link?: string;
+  link: string;
   relevance?: string;
 }
 

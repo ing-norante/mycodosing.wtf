@@ -4,6 +4,7 @@ import { getIntensityLevels } from "@/lib/calculator";
 import { Label } from "@/components/ui/label";
 import { Slider } from "@/components/ui/slider";
 import { useDosageStore } from "@/stores/useDosageStore";
+import { usePostHog } from "posthog-js/react";
 
 const INTENSITY_DESCRIPTIONS: Record<IntensityLevel, string> = {
   microdose: "Sub-perceptual. Fadiman protocol. No impairment expected.",
@@ -16,6 +17,7 @@ const INTENSITY_DESCRIPTIONS: Record<IntensityLevel, string> = {
 };
 
 export function IntensitySelector() {
+  const posthog = usePostHog();
   const { intensity, setIntensity } = useDosageStore();
 
   const levels = getIntensityLevels();
@@ -47,7 +49,12 @@ export function IntensitySelector() {
           max={levels.length - 1}
           step={1}
           value={[currentIndex]}
-          onValueChange={(value) => setIntensity(levels[value[0]].level)}
+          onValueChange={(value) => {
+            setIntensity(levels[value[0]].level);
+            posthog.capture("intensity_changed", {
+              intensity: levels[value[0]].level,
+            });
+          }}
         />
 
         {/* Level markers */}

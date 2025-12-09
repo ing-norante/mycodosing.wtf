@@ -7,6 +7,7 @@ import {
 import { BodyPharmacologySection } from "./BodyPharmacologySection";
 import { ToleranceSection } from "./ToleranceSection";
 import { MaterialQualitySection } from "./MaterialQualitySection";
+import { usePostHog } from "posthog-js/react";
 
 interface AdvancedSettingsProps {
   showMaterialQuality: boolean;
@@ -15,10 +16,19 @@ interface AdvancedSettingsProps {
 export function AdvancedSettings({
   showMaterialQuality,
 }: AdvancedSettingsProps) {
+  const posthog = usePostHog();
+
   return (
     <Accordion type="single" collapsible className="w-full">
       <AccordionItem value="item-1">
-        <AccordionTrigger className="bg-background">
+        <AccordionTrigger
+          className="bg-background"
+          onClick={() =>
+            posthog.capture("advanced_settings_accordion_opened", {
+              value: "advanced_settings",
+            })
+          }
+        >
           Advanced Factors
         </AccordionTrigger>
         <AccordionContent className="bg-background">

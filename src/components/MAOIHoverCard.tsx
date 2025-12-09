@@ -6,6 +6,7 @@ import {
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
+import { usePostHog } from "posthog-js/react";
 
 interface MAOIHoverCardProps {
   checked: boolean;
@@ -16,11 +17,17 @@ export function MAOIHoverCard({
   checked,
   onCheckedChange,
 }: MAOIHoverCardProps) {
+  const posthog = usePostHog();
   return (
     <div className="flex items-center gap-3">
       <Checkbox
         checked={checked}
-        onCheckedChange={(checked) => onCheckedChange(checked as boolean)}
+        onCheckedChange={(checked) => {
+          onCheckedChange(checked as boolean);
+          posthog.capture("on_maoi_changed", {
+            onMAOI: checked as boolean,
+          });
+        }}
         id="maoi-checkbox"
       />
       <div className="flex flex-col">

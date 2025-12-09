@@ -128,6 +128,7 @@ export interface Citation {
   year: number;
   title: string;
   relevance: string;
+  link: string;
 }
 
 // ============================================================================
@@ -561,6 +562,7 @@ export function calculateDosage(input: DosageInput): DosageResult {
       title: "Optimal dosing for psilocybin pharmacotherapy",
       relevance:
         "No significant relationship between body weight (49-113kg) and subjective effects",
+      link: "https://pubmed.ncbi.nlm.nih.gov/33611977/",
     });
   } else if (input.bodyWeightKg) {
     notes.push(
@@ -587,6 +589,7 @@ export function calculateDosage(input: DosageInput): DosageResult {
       year: 2016,
       title: "Tolerance and cross-tolerance to psychedelics",
       relevance: "5-HT2A receptor downregulation; ~14 day recovery period",
+      link: "https://www.sciencedirect.com/science/article/abs/pii/B9780128002124000790",
     });
   }
 

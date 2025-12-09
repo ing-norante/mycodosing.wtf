@@ -6,12 +6,14 @@ import type { DosageInput, DosageResult } from "@/lib/calculator";
 import { calculateDosage } from "@/lib/calculator";
 import { Card } from "@/components/ui/card";
 import { useDosageStore } from "@/stores/useDosageStore";
+import { usePostHog } from "posthog-js/react";
 
 interface InputPanelProps {
   onResult: (result: DosageResult | null, input?: DosageInput) => void;
 }
 
 export function InputPanel({ onResult }: InputPanelProps) {
+  const posthog = usePostHog();
   const {
     substance,
     intensity,
@@ -96,7 +98,20 @@ export function InputPanel({ onResult }: InputPanelProps) {
 
       {/* Calculate Button */}
       <button
-        onClick={handleCalculate}
+        onClick={() => {
+          handleCalculate();
+          posthog.capture("calculate_dosage_button_clicked", {
+            intensity,
+            substance,
+            bodyWeightKg,
+            useWeightAdjustment,
+            onMAOI,
+            lastDosePsilocybinMg,
+            daysSinceLastDose,
+            dryingQuality,
+            storageDegradation,
+          });
+        }}
         className="bg-main text-main-foreground border-foreground w-full cursor-pointer border-3 px-6 py-4 text-xl font-black tracking-wider uppercase transition-all hover:brightness-110 active:brightness-90"
       >
         Calculate Dose
