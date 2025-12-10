@@ -112,7 +112,7 @@ export function InputPanel({ onResult }: InputPanelProps) {
             storageDegradation,
           });
         }}
-        className="bg-main hover:translate-x-boxShadowX hover:translate-y-boxShadowY text-main-foreground border-foreground shadow-shadow w-full cursor-pointer border-3 px-6 py-4 text-xl font-black tracking-wider uppercase transition-all hover:shadow-none"
+        className="bg-main active:translate-x-boxShadowX active:translate-y-boxShadowY hover:translate-x-boxShadowX hover:translate-y-boxShadowY text-main-foreground border-foreground shadow-shadow w-full cursor-pointer border-3 px-6 py-4 text-xl font-black tracking-wider uppercase transition-all hover:shadow-none active:shadow-none"
       >
         Calculate Dose
       </button>

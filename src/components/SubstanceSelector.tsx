@@ -88,7 +88,7 @@ export function SubstanceSelector() {
             key={type.id}
             value={type.id}
             className={cn(
-              "bg-background shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY size-20 w-full cursor-pointer hover:shadow-none lg:size-40",
+              "bg-background shadow-shadow hover:translate-x-boxShadowX hover:translate-y-boxShadowY active:translate-x-boxShadowX active:translate-y-boxShadowY size-20 w-full cursor-pointer hover:shadow-none active:shadow-none lg:size-40",
               type.id === currentType
                 ? "border-border"
                 : "border-border bg-secondary-background/20",
