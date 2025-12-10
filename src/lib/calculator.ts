@@ -164,6 +164,7 @@ const INTENSITY_TARGETS: Record<IntensityLevel, { min: number; max: number }> =
  */
 interface SpeciesData {
   name: string;
+  commonName: string; // New field for street/common names
   category: SubstanceCategory;
   relativeMultiplier: number; // vs cubensis dried
   psilocybinMgPerG: number; // dried material
@@ -179,6 +180,7 @@ const SPECIES_DATABASE: Record<Species | SclerotiaSpecies, SpeciesData> = {
   // === Psilocybe (most common) ===
   psilocybe_cubensis: {
     name: "Psilocybe cubensis",
+    commonName: "Golden Teachers",
     category: "mushroom",
     relativeMultiplier: 1.0, // BASELINE
     psilocybinMgPerG: 6.3,
@@ -192,6 +194,7 @@ const SPECIES_DATABASE: Record<Species | SclerotiaSpecies, SpeciesData> = {
 
   psilocybe_azurescens: {
     name: "Psilocybe azurescens",
+    commonName: "Azures / Flying Saucers",
     category: "mushroom",
     relativeMultiplier: 2.5, // CORRECTED from 1.9
     psilocybinMgPerG: 17.8,
@@ -209,7 +212,8 @@ const SPECIES_DATABASE: Record<Species | SclerotiaSpecies, SpeciesData> = {
   },
 
   psilocybe_semilanceata: {
-    name: "Psilocybe semilanceata (Liberty Caps)",
+    name: "Psilocybe semilanceata",
+    commonName: "Liberty Caps",
     category: "mushroom",
     relativeMultiplier: 1.5, // CORRECTED from 2.0
     psilocybinMgPerG: 9.8,
@@ -222,7 +226,8 @@ const SPECIES_DATABASE: Record<Species | SclerotiaSpecies, SpeciesData> = {
   },
 
   psilocybe_cyanescens: {
-    name: "Psilocybe cyanescens (Wavy Caps)",
+    name: "Psilocybe cyanescens",
+    commonName: "Wavy Caps",
     category: "mushroom",
     relativeMultiplier: 1.6,
     psilocybinMgPerG: 8.5,
@@ -236,6 +241,7 @@ const SPECIES_DATABASE: Record<Species | SclerotiaSpecies, SpeciesData> = {
 
   psilocybe_baeocystis: {
     name: "Psilocybe baeocystis",
+    commonName: "Bluebells / Knobby Tops",
     category: "mushroom",
     relativeMultiplier: 1.8,
     psilocybinMgPerG: 8.5,
@@ -249,6 +255,7 @@ const SPECIES_DATABASE: Record<Species | SclerotiaSpecies, SpeciesData> = {
 
   psilocybe_mexicana: {
     name: "Psilocybe mexicana",
+    commonName: "Mexicana",
     category: "mushroom",
     relativeMultiplier: 0.6,
     psilocybinMgPerG: 2.5,
@@ -262,6 +269,7 @@ const SPECIES_DATABASE: Record<Species | SclerotiaSpecies, SpeciesData> = {
 
   psilocybe_tampanensis: {
     name: "Psilocybe tampanensis",
+    commonName: "Pollock / Tampanensis",
     category: "mushroom",
     relativeMultiplier: 1.0,
     psilocybinMgPerG: 6.8,
@@ -275,6 +283,7 @@ const SPECIES_DATABASE: Record<Species | SclerotiaSpecies, SpeciesData> = {
 
   psilocybe_stuntzii: {
     name: "Psilocybe stuntzii",
+    commonName: "Blue Ringers",
     category: "mushroom",
     relativeMultiplier: 0.55,
     psilocybinMgPerG: 3.6,
@@ -288,6 +297,7 @@ const SPECIES_DATABASE: Record<Species | SclerotiaSpecies, SpeciesData> = {
 
   psilocybe_subaeruginosa: {
     name: "Psilocybe subaeruginosa",
+    commonName: "Subs / Australian",
     category: "mushroom",
     relativeMultiplier: 1.5,
     psilocybinMgPerG: 9.3,
@@ -301,6 +311,7 @@ const SPECIES_DATABASE: Record<Species | SclerotiaSpecies, SpeciesData> = {
 
   psilocybe_weilii: {
     name: "Psilocybe weilii",
+    commonName: "Weilii / GA Weilii",
     category: "mushroom",
     relativeMultiplier: 1.1,
     psilocybinMgPerG: 6.1,
@@ -314,7 +325,8 @@ const SPECIES_DATABASE: Record<Species | SclerotiaSpecies, SpeciesData> = {
 
   // === Panaeolus ===
   panaeolus_cyanescens: {
-    name: "Panaeolus cyanescens (Blue Meanies)",
+    name: "Panaeolus cyanescens",
+    commonName: "Blue Meanies",
     category: "mushroom",
     relativeMultiplier: 1.7,
     psilocybinMgPerG: 8.5,
@@ -327,7 +339,8 @@ const SPECIES_DATABASE: Record<Species | SclerotiaSpecies, SpeciesData> = {
   },
 
   panaeolus_subbalteatus: {
-    name: "Panaeolus subbalteatus (cinctulus)",
+    name: "Panaeolus subbalteatus",
+    commonName: "Subbs / Cinctulus",
     category: "mushroom",
     relativeMultiplier: 0.9,
     psilocybinMgPerG: 6.0,
@@ -342,6 +355,7 @@ const SPECIES_DATABASE: Record<Species | SclerotiaSpecies, SpeciesData> = {
   // === Gymnopilus ===
   gymnopilus_purpuratus: {
     name: "Gymnopilus purpuratus",
+    commonName: "Gym Purps",
     category: "mushroom",
     relativeMultiplier: 0.5,
     psilocybinMgPerG: 3.4,
@@ -356,6 +370,7 @@ const SPECIES_DATABASE: Record<Species | SclerotiaSpecies, SpeciesData> = {
   // === Pluteus ===
   pluteus_salicinus: {
     name: "Pluteus salicinus",
+    commonName: "Pluteus / Willow Shield",
     category: "mushroom",
     relativeMultiplier: 0.4,
     psilocybinMgPerG: 2.1,
@@ -369,7 +384,8 @@ const SPECIES_DATABASE: Record<Species | SclerotiaSpecies, SpeciesData> = {
 
   // === Sclerotia (Truffles) ===
   psilocybe_mexicana_sclerotia: {
-    name: "P. mexicana (Sclerotia/Truffles)",
+    name: "P. mexicana (Sclerotia)",
+    commonName: "Mexicana Truffles",
     category: "sclerotia",
     relativeMultiplier: 0.45,
     psilocybinMgPerG: 3.2,
@@ -382,7 +398,8 @@ const SPECIES_DATABASE: Record<Species | SclerotiaSpecies, SpeciesData> = {
   },
 
   psilocybe_tampanensis_sclerotia: {
-    name: "P. tampanensis (Philosopher's Stones)",
+    name: "P. tampanensis",
+    commonName: "Philosopher's Stones",
     category: "sclerotia",
     relativeMultiplier: 0.55,
     psilocybinMgPerG: 3.1,
@@ -765,12 +782,14 @@ export function calculateDosage(input: DosageInput): DosageResult {
 export function getSpeciesList(): Array<{
   id: string;
   name: string;
+  commonName: string;
   category: SubstanceCategory;
   relativePotency: number;
 }> {
   return Object.entries(SPECIES_DATABASE).map(([id, data]) => ({
     id,
     name: data.name,
+    commonName: data.commonName,
     category: data.category,
     relativePotency: data.relativeMultiplier,
   }));

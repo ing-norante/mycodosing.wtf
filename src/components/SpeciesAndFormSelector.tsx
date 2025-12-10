@@ -23,6 +23,7 @@ function formatSpeciesName(species: string): string {
 
 interface SpeciesOption {
   id: string;
+  commonName: string;
   name: string;
   relativePotency: number;
 }
@@ -65,7 +66,7 @@ export function SpeciesAndFormSelector({
           }}
         >
           <SelectTrigger
-            className="shadow-shadow p-1 cursor-pointer"
+            className="shadow-shadow cursor-pointer p-1"
             aria-label="Select species"
           >
             <SelectValue
@@ -80,8 +81,11 @@ export function SpeciesAndFormSelector({
           <SelectContent>
             {speciesList.map((species) => (
               <SelectItem key={species.id} value={species.id}>
-                <span className="font-semibold">{species.name}</span>
-                <span className="text-xs">
+                <span className="text-sm font-bold">{species.commonName}</span>
+                <span className="font-mono text-xs tracking-tight italic">
+                  {species.name}
+                </span>
+                <span className="text-xs font-semibold">
                   ({species.relativePotency.toFixed(1)}x)
                 </span>
               </SelectItem>

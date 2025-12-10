@@ -12,7 +12,7 @@ export function Footer() {
     });
   };
   return (
-    <footer className="border-foreground bg-background mt-8 border-t-4 pt-6 pb-4 lg:mt-12">
+    <footer className="border-foreground bg-transparent mt-8 border-t-4 pt-6 pb-4 lg:mt-12">
       <div className="mx-auto max-w-7xl">
         <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
           <div className="flex flex-wrap items-center justify-center gap-6 md:justify-start">
