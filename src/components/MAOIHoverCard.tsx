@@ -1,13 +1,13 @@
 import { AlertTriangle } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
-import { usePostHog } from "posthog-js/react";
 import { CircleQuestionMark } from "lucide-react";
+import { usePostHog } from "posthog-js/react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 interface MAOIHoverCardProps {
   checked: boolean;
@@ -38,17 +38,14 @@ export function MAOIHoverCard({
       >
         Currently on Anti-depressant
       </Label>
-      <HoverCard openDelay={0} closeDelay={100}>
-        <HoverCardTrigger asChild className="cursor-pointer">
-          <button
-            type="button"
-            className="focus-visible:ring-ring inline text-sm underline hover:no-underline focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50"
+      <Popover>
+        <PopoverTrigger>
+          <CircleQuestionMark
+            className="size-4"
             aria-label="Learn more about MAOI"
-          >
-            <CircleQuestionMark className="size-4" />
-          </button>
-        </HoverCardTrigger>
-        <HoverCardContent className="flex flex-col gap-2 text-sm">
+          />
+        </PopoverTrigger>
+        <PopoverContent className="bg-main text-main-foreground flex flex-col gap-2 rounded-none text-sm">
           <p>
             MAOI (Monoamine Oxidase Inhibitor) are a class of older
             antidepressant drugs that work by blocking the enzyme monoamine
@@ -60,8 +57,8 @@ export function MAOIHoverCard({
             <AlertTriangle className="size-4" />
             Dangerous interaction — dose halved automatically
           </div>
-        </HoverCardContent>
-      </HoverCard>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 }
