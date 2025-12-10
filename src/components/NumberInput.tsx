@@ -27,6 +27,8 @@ export function NumberInput({
       </Label>
       <Input
         type="number"
+        inputMode="numeric"
+        pattern="[0-9]*"
         id={id}
         placeholder={placeholder}
         min={min}

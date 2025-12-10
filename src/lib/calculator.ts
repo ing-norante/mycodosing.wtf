@@ -798,7 +798,7 @@ export function getIntensityLevels(): Array<{
     threshold: "Threshold",
     light: "Light",
     moderate: "Moderate",
-    strong: "Strong (Therapeutic)",
+    strong: "Strong",
     heroic: "Heroic",
   };
 
