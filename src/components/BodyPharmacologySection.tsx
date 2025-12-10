@@ -4,7 +4,11 @@ import { CheckboxWithLabel } from "./CheckboxWithLabel";
 import { MAOIHoverCard } from "./MAOIHoverCard";
 import { useDosageStore } from "@/stores/useDosageStore";
 import { CircleQuestionMark } from "lucide-react";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "./ui/hover-card";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 export function BodyPharmacologySection() {
   const {
@@ -26,17 +30,14 @@ export function BodyPharmacologySection() {
           onCheckedChange={setUseWeightAdjustment}
           label="Use weight-based adjustment"
         />
-        <HoverCard openDelay={0} closeDelay={100}>
-          <HoverCardTrigger asChild>
-            <button
-              type="button"
-              className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-              aria-label="Learn more about weight-based adjustment"
-            >
-              <CircleQuestionMark className="size-4" />
-            </button>
-          </HoverCardTrigger>
-          <HoverCardContent>
+        <Popover>
+          <PopoverTrigger>
+            <CircleQuestionMark
+              className="size-4"
+              aria-label="Learn more about MAOI"
+            />
+          </PopoverTrigger>
+          <PopoverContent className="bg-main text-main-foreground flex flex-col gap-2 rounded-none text-sm">
             <p>
               Clinical data{" "}
               <a
@@ -51,8 +52,8 @@ export function BodyPharmacologySection() {
               between 49-113kg. If enabled, we clamp the adjustment to avoid
               dangerous overdoses for heavier users.
             </p>
-          </HoverCardContent>
-        </HoverCard>
+          </PopoverContent>
+        </Popover>
       </div>
       {useWeightAdjustment && (
         <NumberInput
