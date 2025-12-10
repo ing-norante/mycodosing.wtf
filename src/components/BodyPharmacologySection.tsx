@@ -26,9 +26,15 @@ export function BodyPharmacologySection() {
           onCheckedChange={setUseWeightAdjustment}
           label="Use weight-based adjustment"
         />
-        <HoverCard>
+        <HoverCard openDelay={0} closeDelay={100}>
           <HoverCardTrigger asChild>
-            <CircleQuestionMark className="size-4" />
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
+              aria-label="Learn more about weight-based adjustment"
+            >
+              <CircleQuestionMark className="size-4" />
+            </button>
           </HoverCardTrigger>
           <HoverCardContent>
             <p>
