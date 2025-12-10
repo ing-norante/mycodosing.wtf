@@ -43,7 +43,7 @@ const initialState = {
   } as DosageInput["substance"],
   intensity: "moderate" as IntensityLevel,
   bodyWeightKg: undefined,
-  useWeightAdjustment: false,
+  useWeightAdjustment: true,
   onMAOI: false,
   lastDosePsilocybinMg: undefined,
   daysSinceLastDose: undefined,
@@ -86,4 +86,3 @@ export const useDosageStore = create<DosageStore>()(
     },
   ),
 );
-

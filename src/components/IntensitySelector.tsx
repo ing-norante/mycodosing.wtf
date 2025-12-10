@@ -43,7 +43,7 @@ export function IntensitySelector() {
       </div>
 
       {/* Slider */}
-      <div className="space-y-2">
+      <div className="space-y-4">
         <Slider
           className="cursor-pointer"
           aria-label="Intensity level slider"
@@ -65,7 +65,7 @@ export function IntensitySelector() {
               key={level.level}
               onClick={() => setIntensity(level.level)}
               className={cn(
-                "cursor-pointer px-1 text-xs font-bold uppercase transition-colors",
+                "shadow-shadow-small hover:translate-x-boxShadowX hover:translate-y-boxShadowY active:translate-x-boxShadowX active:translate-y-boxShadowY cursor-pointer rounded-none border px-1 text-xs font-bold uppercase transition-colors hover:shadow-none active:shadow-none",
                 i === currentIndex
                   ? "text-main"
                   : "text-muted-foreground hover:text-foreground",
