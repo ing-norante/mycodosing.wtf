@@ -29,7 +29,7 @@
     "@radix-ui/react-switch": "^1.2.6",
     "@radix-ui/react-tabs": "^1.1.13",
     "@radix-ui/react-tooltip": "^1.2.8",
-    "@tailwindcss/vite": "^4.1.17",
+    "@tailwindcss/vite": "^4.1.18",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "lucide-react": "^0.560.0",
@@ -39,7 +39,7 @@
     "recharts": "^3.5.1",
     "rolldown-vite": "^7.2.10",
     "tailwind-merge": "^3.4.0",
-    "tailwindcss": "^4.1.17",
+    "tailwindcss": "^4.1.18",
     "zustand": "^5.0.9"
   },
   "devDependencies": {
