@@ -15,7 +15,6 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: "autoUpdate",
-      injectRegister: false,
 
       pwaAssets: {
         disabled: false,
@@ -28,6 +27,8 @@ export default defineConfig({
         description:
           "MYCODOSING.WTF — The Anti-Bullshit Psychedelic Calculator",
         theme_color: "#000000",
+        background_color: "#000000",
+        display: "standalone",
         icons: [
           {
             src: "pwa-64x64.png",
@@ -58,6 +59,7 @@ export default defineConfig({
         globPatterns: ["**/*.{js,css,html,svg,png,ico}"],
         cleanupOutdatedCaches: true,
         clientsClaim: true,
+        skipWaiting: true,
       },
 
       devOptions: {
