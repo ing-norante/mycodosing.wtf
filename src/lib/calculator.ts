@@ -403,7 +403,7 @@ const SPECIES_DATABASE: Record<Species | SclerotiaSpecies, SpeciesData> = {
     category: "sclerotia",
     relativeMultiplier: 0.55,
     psilocybinMgPerG: 3.1,
-    psilocinMgPerG: 6.8, // Unusually high psilocin retention
+    psilocinMgPerG: 0.68, // Corrected from 6.8 - aligns with real-world commercial truffle data
     baeocystinMgPerG: 0.2,
     uncertaintyFactor: 0.2, // Very consistent
     freshToDryRatio: 3,
@@ -511,6 +511,7 @@ function calculateWeightFactor(
  */
 function calculateToleranceMultiplier(tolerance?: ToleranceInput): number {
   if (!tolerance) return 1.0;
+  if (tolerance.lastDosePsilocybinMg <= 0) return 1.0; // No tolerance if no previous dose
   if (tolerance.daysSinceLastDose >= 14) return 1.0;
   if (tolerance.daysSinceLastDose <= 0) return 2.5; // Same-day redose
 
@@ -645,9 +646,9 @@ export function calculateDosage(input: DosageInput): DosageResult {
     confidence = "high"; // Pure compound
 
     potencyMgPerG = {
-      min: 1000 * synth.psilocybinEquivalentRatio * (1 + uncertainty),
+      min: 1000 * synth.psilocybinEquivalentRatio * (1 - uncertainty),
       median: 1000 * synth.psilocybinEquivalentRatio,
-      max: 1000 * synth.psilocybinEquivalentRatio * (1 - uncertainty),
+      max: 1000 * synth.psilocybinEquivalentRatio * (1 + uncertainty),
     };
 
     // Add synthetic warnings
@@ -672,12 +673,13 @@ export function calculateDosage(input: DosageInput): DosageResult {
 
     // Apply degradation factors
     const dryingFactor = getDryingDegradationFactor(input.dryingQuality);
-    const storageFactor = 1 - (input.storageDegradation ?? 0);
+    const storageDegradation = clamp(input.storageDegradation ?? 0, 0, 0.9);
+    const storageFactor = 1 - storageDegradation;
     basePotencyMgPerG *= dryingFactor * storageFactor;
 
-    if (input.storageDegradation && input.storageDegradation > 0) {
+    if (storageDegradation > 0) {
       notes.push(
-        `Storage degradation: ${(input.storageDegradation * 100).toFixed(
+        `Storage degradation: ${(storageDegradation * 100).toFixed(
           0,
         )}% potency loss assumed`,
       );
