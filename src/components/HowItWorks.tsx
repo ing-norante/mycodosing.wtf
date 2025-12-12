@@ -53,17 +53,23 @@ export const HowItWorks = () => {
           </p>
           <ul className={styles.list}>
             <li>
-              <strong>Microdose:</strong> 1–3 mg
+              <strong>Microdose:</strong> 1-3 mg
             </li>
             <li>
-              <strong>Moderate:</strong> 12–20 mg
+              <strong>Threshold:</strong> 3-6 mg
             </li>
             <li>
-              <strong>Strong (Therapeutic):</strong> 20–30 mg (Based on Johns
-              Hopkins & COMPASS trials)
+              <strong>Light:</strong> 6-12 mg
             </li>
             <li>
-              <strong>Heroic:</strong> 35–50 mg
+              <strong>Moderate:</strong> 12-20 mg
+            </li>
+            <li>
+              <strong>Strong:</strong> 20-30 mg (Based on Johns Hopkins &
+              COMPASS trials)
+            </li>
+            <li>
+              <strong>Heroic:</strong> 35-50 mg
             </li>
           </ul>
         </div>
