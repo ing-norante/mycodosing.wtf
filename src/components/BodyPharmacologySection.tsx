@@ -1,7 +1,7 @@
-import { NumberInput } from "./NumberInput";
-import { SectionHeader } from "./SectionHeader";
-import { CheckboxWithLabel } from "./CheckboxWithLabel";
-import { MAOIHoverCard } from "./MAOIHoverCard";
+import { NumberInput } from "@/components/NumberInput";
+import { SectionHeader } from "@/components/SectionHeader";
+import { CheckboxWithLabel } from "@/components/CheckboxWithLabel";
+import { MAOIHoverCard } from "@/components/MAOIHoverCard";
 import { useDosageStore } from "@/stores/useDosageStore";
 import { CircleQuestionMark } from "lucide-react";
 import {
@@ -61,7 +61,7 @@ export function BodyPharmacologySection() {
           label="Body weight (kg)"
           value={bodyWeightKg}
           onChange={setBodyWeightKg}
-          placeholder="70"
+          min={0}
         />
       )}
 

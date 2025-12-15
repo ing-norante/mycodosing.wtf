@@ -4,9 +4,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { BodyPharmacologySection } from "./BodyPharmacologySection";
-import { ToleranceSection } from "./ToleranceSection";
-import { MaterialQualitySection } from "./MaterialQualitySection";
+import { ToleranceSection } from "@/components/ToleranceSection";
+import { MaterialQualitySection } from "@/components/MaterialQualitySection";
 import { usePostHog } from "posthog-js/react";
 
 interface AdvancedSettingsProps {
@@ -33,8 +32,7 @@ export function AdvancedSettings({
         </AccordionTrigger>
         <AccordionContent className="bg-background">
           <div className="mt-6 space-y-6">
-            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-              <BodyPharmacologySection />
+            <div className="grid grid-cols-1 gap-6">
               {showMaterialQuality && <MaterialQualitySection />}
             </div>
             <ToleranceSection />

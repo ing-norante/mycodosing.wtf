@@ -7,6 +7,7 @@ import { calculateDosage } from "@/lib/calculator";
 import { Card } from "@/components/ui/card";
 import { useDosageStore } from "@/stores/useDosageStore";
 import { usePostHog } from "posthog-js/react";
+import { BodyPharmacologySection } from "./BodyPharmacologySection";
 
 interface InputPanelProps {
   onResult: (result: DosageResult | null, input?: DosageInput) => void;
@@ -25,6 +26,9 @@ export function InputPanel({ onResult }: InputPanelProps) {
     dryingQuality,
     storageDegradation,
   } = useDosageStore();
+
+  const isCalculateDisabled =
+    useWeightAdjustment && bodyWeightKg === undefined;
 
   const handleCalculate = useCallback(() => {
     const input: DosageInput = {
@@ -82,11 +86,17 @@ export function InputPanel({ onResult }: InputPanelProps) {
             </h3>
             <SubstanceSelector />
           </section>
-
+          {/* Body & Pharmacology Adjustments */}
+          <section>
+            <h3 className="mb-4 text-xs tracking-widest uppercase">
+              2. Body & Pharmacology Adjustments
+            </h3>
+            <BodyPharmacologySection />
+          </section>
           {/* Intensity Selection */}
           <section>
             <h3 className="mb-4 text-xs tracking-widest uppercase">
-              2. Choose Intensity
+              3. Choose Intensity
             </h3>
             <IntensitySelector />
           </section>
@@ -112,7 +122,8 @@ export function InputPanel({ onResult }: InputPanelProps) {
             storageDegradation,
           });
         }}
-        className="bg-main active:translate-x-boxShadowX active:translate-y-boxShadowY hover:translate-x-boxShadowX hover:translate-y-boxShadowY text-main-foreground border-foreground shadow-shadow w-full cursor-pointer border-3 px-6 py-4 text-xl font-black tracking-wider uppercase transition-all hover:shadow-none active:shadow-none"
+        disabled={isCalculateDisabled}
+        className="bg-main active:translate-x-boxShadowX active:translate-y-boxShadowY hover:translate-x-boxShadowX hover:translate-y-boxShadowY text-main-foreground border-foreground shadow-shadow w-full cursor-pointer border-3 px-6 py-4 text-xl font-black tracking-wider uppercase transition-all hover:shadow-none active:shadow-none disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-x-0 disabled:hover:translate-y-0 disabled:hover:shadow-shadow disabled:active:translate-x-0 disabled:active:translate-y-0 disabled:active:shadow-shadow"
       >
         Calculate Dose
       </button>
