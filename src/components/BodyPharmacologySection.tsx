@@ -1,5 +1,4 @@
 import { NumberInput } from "@/components/NumberInput";
-import { SectionHeader } from "@/components/SectionHeader";
 import { CheckboxWithLabel } from "@/components/CheckboxWithLabel";
 import { MAOIHoverCard } from "@/components/MAOIHoverCard";
 import { useDosageStore } from "@/stores/useDosageStore";
@@ -22,8 +21,6 @@ export function BodyPharmacologySection() {
 
   return (
     <div className="space-y-4">
-      <SectionHeader title="Body & Pharmacology" />
-
       <div className="flex items-center gap-3">
         <CheckboxWithLabel
           checked={useWeightAdjustment}
